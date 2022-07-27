@@ -1,0 +1,54 @@
+07/27/2022 11:53:26 - WARNING - __main__ -   Process rank: -1, device: cuda, n_gpu: 1, distributed training: False, 16-bits training: False
+07/27/2022 11:53:26 - INFO - transformers.configuration_utils -   loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/microsoft/codebert-base/config.json from cache at /home/chen136/.cache/torch/transformers/1b62771d5f5169b34713b0af1ab85d80e11f7b1812fbf3ee7d03a866c5f58e72.06eb31f0a63f4e8a136733ccac422f0abf9ffa87c3e61104b57e7075a704d008
+07/27/2022 11:53:26 - INFO - transformers.configuration_utils -   Model config RobertaConfig {
+  "architectures": [
+    "RobertaModel"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "do_sample": false,
+  "eos_token_id": 2,
+  "eos_token_ids": 0,
+  "finetuning_task": null,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "is_decoder": false,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1
+  },
+  "layer_norm_eps": 1e-05,
+  "length_penalty": 1.0,
+  "max_length": 20,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 12,
+  "num_beams": 1,
+  "num_hidden_layers": 12,
+  "num_labels": 2,
+  "num_return_sequences": 1,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pad_token_id": 1,
+  "pruned_heads": {},
+  "repetition_penalty": 1.0,
+  "temperature": 1.0,
+  "top_k": 50,
+  "top_p": 1.0,
+  "torchscript": false,
+  "type_vocab_size": 1,
+  "use_bfloat16": false,
+  "vocab_size": 50265
+}
+
+07/27/2022 11:53:27 - INFO - transformers.tokenization_utils -   loading file https://s3.amazonaws.com/models.huggingface.co/bert/roberta-base-vocab.json from cache at /home/chen136/.cache/torch/transformers/d0c5776499adc1ded22493fae699da0971c1ee4c2587111707a4d177d20257a2.ef00af9e673c7160b4d41cfda1f48c5f4cba57d5142754525572a846a1ab1b9b
+07/27/2022 11:53:27 - INFO - transformers.tokenization_utils -   loading file https://s3.amazonaws.com/models.huggingface.co/bert/roberta-base-merges.txt from cache at /home/chen136/.cache/torch/transformers/b35e7cd126cd4229a746b5d5c29a749e8e84438b14bcdb575950584fe33207e8.70bec105b4158ed9a1747fea67a43f5dee97855c64d62b6ec3742f4cfdb5feda
+07/27/2022 11:53:27 - INFO - transformers.modeling_utils -   loading weights file https://s3.amazonaws.com/models.huggingface.co/bert/microsoft/codebert-base/pytorch_model.bin from cache at /home/chen136/.cache/torch/transformers/3416309b564f60f87c1bc2ce8d8a82bb7c1e825b241c816482f750b48a5cdc26.96251fe4478bac0cff9de8ae3201e5847cee59aebbcafdfe6b2c361f9398b349
