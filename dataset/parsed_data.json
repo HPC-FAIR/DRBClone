@@ -1,0 +1,3963 @@
+{
+	"path": "./micro-benchmarks",
+	"data": [
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB001-antidep1-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "63",
+			"start_line": "64",
+			"end_line": "64",
+			"kernel": "a[i] = a[i + 1] + 1;",
+			"function": "int main(int argc,char *argv[]){int i;int len = 1000;int a[1000];for(i = 0;i < len;i++) a[i] = i;#pragma omp parallel forfor(i = 0;i < len - 1;i++) a[i] = a[i + 1] + 1;printf(\"a[500]=%d\n\",a[500]);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len - 1;i++) a[i] = a[i + 1] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB002-antidep1-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "66",
+			"start_line": "67",
+			"end_line": "67",
+			"kernel": "a[i] = a[i + 1] + 1;",
+			"function": "int main(int argc,char *argv[]){int i;int len = 1000;if(argc > 1) len = atoi(argv[1]);int a[len];for(i = 0;i < len;i++) a[i] = i;#pragma omp parallel forfor(i = 0;i < len - 1;i++) a[i] = a[i + 1] + 1;return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len - 1;i++) a[i] = a[i + 1] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB003-antidep2-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private(j)",
+			"abs_start_line": "65",
+			"start_line": "66",
+			"end_line": "69",
+			"kernel": "{for(j = 0;j < len;j += 1) {a[i][j] += a[i + 1][j];}}",
+			"function": "int main(int argc,char *argv[]){int i;int j;int len = 20;double a[20][20];for(i = 0;i < len;i++) for(j = 0;j < len;j++) a[i][j] = 0.5;#pragma omp parallel for private(j)for(i = 0;i < len - 1;i += 1) {for(j = 0;j < len;j += 1) {a[i][j] += a[i + 1][j];}}printf(\"a[10][10]=%f\n\",a[10][10]);return 0;}",
+			"pragma": "omp parallel for private(j)\nfor(i = 0;i < len - 1;i += 1) {for(j = 0;j < len;j += 1) {a[i][j] += a[i + 1][j];}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB004-antidep2-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private(j)",
+			"abs_start_line": "68",
+			"start_line": "69",
+			"end_line": "72",
+			"kernel": "{for(j = 0;j < len;j += 1) {a[i][j] += a[i + 1][j];}}",
+			"function": "int main(int argc,char *argv[]){int i;int j;int len = 20;if(argc > 1) len = atoi(argv[1]);double a[len][len];for(i = 0;i < len;i++) for(j = 0;j < len;j++) a[i][j] = 0.5;#pragma omp parallel for private(j)for(i = 0;i < len - 1;i += 1) {for(j = 0;j < len;j += 1) {a[i][j] += a[i + 1][j];}}return 0;}",
+			"pragma": "omp parallel for private(j)\nfor(i = 0;i < len - 1;i += 1) {for(j = 0;j < len;j += 1) {a[i][j] += a[i + 1][j];}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB005-indirectaccess1-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for schedule(static,1)",
+			"abs_start_line": "125",
+			"start_line": "126",
+			"end_line": "130",
+			"kernel": "{int idx = indexSet[i];xa1[idx] += 1.0 + i;xa2[idx] += 3.0 + i;}",
+			"function": "int main(int argc,char *argv[]){double *base =(double *)(malloc(sizeof(double ) *(2013 + 12 + 1)));if(base == 0) {printf(\"Error in malloc(). Aborting ...\n\");return 1;}double *xa1 = base;double *xa2 = xa1 + 12;int i;for(i = 521;i <= 2025;++i) {base[i] = 0.5 * i;}#pragma omp parallel for schedule(static,1)for(i = 0;i < 180;++i) {int idx = indexSet[i];xa1[idx] += 1.0 + i;xa2[idx] += 3.0 + i;}printf(\"x1[999]=%f xa2[1285]=%f\n\",xa1[999],xa2[1285]);free(base);return 0;}",
+			"pragma": "omp parallel for schedule(static,1)\nfor(i = 0;i < 180;++i) {int idx = indexSet[i];xa1[idx] += 1.0 + i;xa2[idx] += 3.0 + i;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB006-indirectaccess2-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "125",
+			"start_line": "126",
+			"end_line": "130",
+			"kernel": "{int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}",
+			"function": "int main(int argc,char *argv[]){double *base =(double *)(malloc(sizeof(double ) *(2013 + 12 + 1)));if(base == 0) {printf(\"Error in malloc(). Aborting ...\n\");return 1;}double *xa1 = base;double *xa2 = xa1 + 12;int i;for(i = 521;i <= 2025;++i) {base[i] = 0.5 * i;}#pragma omp parallel forfor(i = 0;i < 180;++i) {int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}printf(\"x1[999]=%f xa2[1285]=%f\n\",xa1[999],xa2[1285]);free(base);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < 180;++i) {int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB007-indirectaccess3-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "125",
+			"start_line": "126",
+			"end_line": "130",
+			"kernel": "{int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}",
+			"function": "int main(int argc,char *argv[]){double *base =(double *)(malloc(sizeof(double ) *(2013 + 12 + 1)));if(base == 0) {printf(\"Error in malloc(). Aborting ...\n\");return 1;}double *xa1 = base;double *xa2 = xa1 + 12;int i;for(i = 521;i <= 2025;++i) {base[i] = 0.5 * i;}#pragma omp parallel forfor(i = 0;i < 180;++i) {int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}printf(\"x1[999]=%f xa2[1285]=%f\n\",xa1[999],xa2[1285]);free(base);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < 180;++i) {int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB008-indirectaccess4-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "125",
+			"start_line": "126",
+			"end_line": "130",
+			"kernel": "{int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}",
+			"function": "int main(int argc,char *argv[]){double *base =(double *)(malloc(sizeof(double ) *(2013 + 12 + 1)));if(base == 0) {printf(\"Error in malloc(). Aborting ...\n\");return 1;}double *xa1 = base;double *xa2 = xa1 + 12;int i;for(i = 521;i <= 2025;++i) {base[i] = 0.5 * i;}#pragma omp parallel forfor(i = 0;i < 180;++i) {int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}printf(\"x1[999]=%f xa2[1285]=%f\n\",xa1[999],xa2[1285]);free(base);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < 180;++i) {int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB009-lastprivatemissing-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private (i)",
+			"abs_start_line": "58",
+			"start_line": "59",
+			"end_line": "59",
+			"kernel": "x = i;",
+			"function": "int main(int argc,char *argv[]){int i;int x;int len = 10000;#pragma omp parallel for private(i)for(i = 0;i < len;i++) x = i;printf(\"x=%d\",x);return 0;}",
+			"pragma": "omp parallel for private (i)\nfor(i = 0;i < len;i++) x = i;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB010-lastprivatemissing-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private (i)",
+			"abs_start_line": "62",
+			"start_line": "63",
+			"end_line": "63",
+			"kernel": "x = i;",
+			"function": "int main(int argc,char *argv[]){int i;int x;int len = 10000;if(argc > 1) len = atoi(argv[1]);#pragma omp parallel for private(i)for(i = 0;i < len;i++) x = i;printf(\"x=%d\",x);return 0;}",
+			"pragma": "omp parallel for private (i)\nfor(i = 0;i < len;i++) x = i;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB011-minusminus-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "72",
+			"start_line": "73",
+			"end_line": "76",
+			"kernel": "{if(x[i] <= 0) {numNodes2--;}}",
+			"function": "int main(int argc,char *argv[]){int i;int len = 100;int numNodes = len;int numNodes2 = 0;int x[100];for(i = 0;i < len;i++) {if(i % 2 == 0) x[i] = 5;else x[i] = - 5;}#pragma omp parallel forfor(i = numNodes - 1;i > - 1;--i) {if(x[i] <= 0) {numNodes2--;}}printf(\"numNodes2 = %d\n\",numNodes2);return 0;}",
+			"pragma": "omp parallel for\nfor(i = numNodes - 1;i > - 1;--i) {if(x[i] <= 0) {numNodes2--;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB012-minusminus-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "72",
+			"start_line": "73",
+			"end_line": "76",
+			"kernel": "{if(x[i] <= 0) {numNodes2--;}}",
+			"function": "int main(int argc,char *argv[]){int i;int len = 100;if(argc > 1) len = atoi(argv[1]);int numNodes = len;int numNodes2 = 0;int x[len];for(i = 0;i < len;i++) {if(i % 2 == 0) x[i] = 5;else x[i] = - 5;}#pragma omp parallel forfor(i = numNodes - 1;i > - 1;--i) {if(x[i] <= 0) {numNodes2--;}}return 0;}",
+			"pragma": "omp parallel for\nfor(i = numNodes - 1;i > - 1;--i) {if(x[i] <= 0) {numNodes2--;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB013-nowait-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel shared(b, error)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for nowait",
+			"abs_start_line": "71",
+			"start_line": "72",
+			"end_line": "72",
+			"kernel": "a[i] = b + a[i] * 5;",
+			"function": "int main(){int i;int error;int len = 1000;int a[len];int b = 5;for(i = 0;i < len;i++) a[i] = i;#pragma omp parallel shared(b, error){#pragma omp for nowaitfor(i = 0;i < len;i++) a[i] = b + a[i] * 5;#pragma omp singleerror = a[9] + 1;}printf(\"error = %d\n\",error);return 0;}",
+			"pragma": "omp for nowait\nfor(i = 0;i < len;i++) a[i] = b + a[i] * 5;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB014-outofbounds-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private(j)",
+			"abs_start_line": "73",
+			"start_line": "74",
+			"end_line": "75",
+			"kernel": "for(j = 0;j < m;j++) b[i][j] = b[i][j - 1];",
+			"function": "int main(int argc,char *argv[]){int i;int j;int n = 100;int m = 100;double b[n][m];#pragma omp parallel for private(j)for(i = 1;i < n;i++) for(j = 0;j < m;j++) b[i][j] = b[i][j - 1];printf(\"b[50][50]=%f\n\",b[50][50]);return 0;}",
+			"pragma": "omp parallel for private(j)\nfor(i = 1;i < n;i++) for(j = 0;j < m;j++) b[i][j] = b[i][j - 1];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB015-outofbounds-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private(j)",
+			"abs_start_line": "78",
+			"start_line": "79",
+			"end_line": "80",
+			"kernel": "for(j = 0;j < m;j++) b[i][j] = b[i][j - 1];",
+			"function": "int main(int argc,char *argv[]){int i;int j;int len = 100;if(argc > 1) len = atoi(argv[1]);int n = len;int m = len;double b[n][m];#pragma omp parallel for private(j)for(i = 1;i < n;i++) for(j = 0;j < m;j++) b[i][j] = b[i][j - 1];return 0;}",
+			"pragma": "omp parallel for private(j)\nfor(i = 1;i < n;i++) for(j = 0;j < m;j++) b[i][j] = b[i][j - 1];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB016-outputdep-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "71",
+			"start_line": "72",
+			"end_line": "75",
+			"kernel": "{a[i] = x;x = i;}",
+			"function": "int main(){int len = 100;int i;int x = 10;#pragma omp parallel forfor(i = 0;i < len;i++) {a[i] = x;x = i;}printf(\"x=%d\",x);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;i++) {a[i] = x;x = i;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB017-outputdep-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "69",
+			"start_line": "70",
+			"end_line": "73",
+			"kernel": "{a[i] = x;x = i;}",
+			"function": "int main(int argc,char *argv[]){int len = 100;if(argc > 1) len = atoi(argv[1]);int a[len];int i;int x = 10;#pragma omp parallel forfor(i = 0;i < len;i++) {a[i] = x;x = i;}printf(\"x=%d, a[0]=%d\n\",x,a[0]);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;i++) {a[i] = x;x = i;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB018-plusplus-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "70",
+			"start_line": "71",
+			"end_line": "73",
+			"kernel": "{output[outLen++] = input[i];}",
+			"function": "int main(){int i;int inLen = 1000;int outLen = 0;for(i = 0;i < inLen;++i) input[i] = i;#pragma omp parallel forfor(i = 0;i < inLen;++i) {output[outLen++] = input[i];}printf(\"output[500]=%d\n\",output[500]);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < inLen;++i) {output[outLen++] = input[i];}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB019-plusplus-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "71",
+			"start_line": "72",
+			"end_line": "73",
+			"kernel": "{output[outLen++] = input[i];}",
+			"function": "int main(int argc,char *argv[]){int i;int inLen = 1000;int outLen = 0;if(argc > 1) inLen = atoi(argv[1]);int input[inLen];int output[inLen];for(i = 0;i < inLen;++i) input[i] = i;#pragma omp parallel forfor(i = 0;i < inLen;++i) {output[outLen++] = input[i];}printf(\"output[0]=%d\n\",output[0]);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < inLen;++i) {output[outLen++] = input[i];}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB020-privatemissing-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "63",
+			"start_line": "64",
+			"end_line": "67",
+			"kernel": "{tmp = a[i] + i;a[i] = tmp;}",
+			"function": "int main(int argc,char *argv[]){int i;int tmp;int len = 100;if(argc > 1) len = atoi(argv[1]);int a[len];for(i = 0;i < len;i++) a[i] = i;#pragma omp parallel forfor(i = 0;i < len;i++) {tmp = a[i] + i;a[i] = tmp;}return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;i++) {tmp = a[i] + i;a[i] = tmp;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB021-reductionmissing-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private (temp,i,j)",
+			"abs_start_line": "66",
+			"start_line": "67",
+			"end_line": "71",
+			"kernel": "for(j = 0;j < len;j++) {temp = u[i][j];sum = sum + temp * temp;}",
+			"function": "int main(int argc,char *argv[]){int i;int j;float temp;float sum = 0.0;int len = 100;float u[100][100];for(i = 0;i < len;i++) for(j = 0;j < len;j++) u[i][j] = 0.5;#pragma omp parallel for private(temp,i,j)for(i = 0;i < len;i++) for(j = 0;j < len;j++) {temp = u[i][j];sum = sum + temp * temp;}printf(\"sum = %f\n\",sum);return 0;}",
+			"pragma": "omp parallel for private (temp,i,j)\nfor(i = 0;i < len;i++) for(j = 0;j < len;j++) {temp = u[i][j];sum = sum + temp * temp;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB022-reductionmissing-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private (temp,i,j)",
+			"abs_start_line": "68",
+			"start_line": "69",
+			"end_line": "73",
+			"kernel": "for(j = 0;j < len;j++) {temp = u[i][j];sum = sum + temp * temp;}",
+			"function": "int main(int argc,char *argv[]){int i;int j;float temp;float sum = 0.0;int len = 100;if(argc > 1) len = atoi(argv[1]);float u[len][len];for(i = 0;i < len;i++) for(j = 0;j < len;j++) u[i][j] = 0.5;#pragma omp parallel for private(temp,i,j)for(i = 0;i < len;i++) for(j = 0;j < len;j++) {temp = u[i][j];sum = sum + temp * temp;}printf(\"sum = %f\n\",sum);return 0;}",
+			"pragma": "omp parallel for private (temp,i,j)\nfor(i = 0;i < len;i++) for(j = 0;j < len;j++) {temp = u[i][j];sum = sum + temp * temp;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB023-sections1-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel sections",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp section",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp section",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB024-simdtruedep-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp simd",
+			"abs_start_line": "65",
+			"start_line": "66",
+			"end_line": "66",
+			"kernel": "a[i + 1] = a[i] + b[i];",
+			"function": "int main(int argc,char *argv[]){int i;int len = 100;int a[100];int b[100];for(i = 0;i < len;i++) {a[i] = i;b[i] = i + 1;}#pragma omp simdfor(i = 0;i < len - 1;i++) a[i + 1] = a[i] + b[i];for(i = 0;i < len;i++) printf(\"i=%d a[%d]=%d\n\",i,i,a[i]);return 0;}",
+			"pragma": "omp simd\nfor(i = 0;i < len - 1;i++) a[i + 1] = a[i] + b[i];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB025-simdtruedep-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp simd",
+			"abs_start_line": "67",
+			"start_line": "68",
+			"end_line": "68",
+			"kernel": "a[i + 1] = a[i] * b[i];",
+			"function": "int main(int argc,char *argv[]){int i;int len = 100;if(argc > 1) len = atoi(argv[1]);int a[len];int b[len];for(i = 0;i < len;i++) {a[i] = i;b[i] = i + 1;}#pragma omp simdfor(i = 0;i < len - 1;i++) a[i + 1] = a[i] * b[i];return 0;}",
+			"pragma": "omp simd\nfor(i = 0;i < len - 1;i++) a[i + 1] = a[i] * b[i];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB026-targetparallelfor-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(a[0:len])",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "63",
+			"start_line": "64",
+			"end_line": "64",
+			"kernel": "a[i] = a[i + 1] + 1;",
+			"function": "int main(int argc,char *argv[]){int i;int len = 1000;int a[1000];for(i = 0;i < len;i++) a[i] = i;#pragma omp target map(a[0:len])#pragma omp parallel forfor(i = 0;i < len - 1;i++) a[i] = a[i + 1] + 1;return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len - 1;i++) a[i] = a[i + 1] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB027-taskdependmissing-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB028-privatemissing-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "63",
+			"start_line": "64",
+			"end_line": "67",
+			"kernel": "{tmp = a[i] + i;a[i] = tmp;}",
+			"function": "int main(int argc,char *argv[]){int i;int tmp;int len = 100;int a[100];for(i = 0;i < len;i++) a[i] = i;#pragma omp parallel forfor(i = 0;i < len;i++) {tmp = a[i] + i;a[i] = tmp;}printf(\"a[50]=%d\n\",a[50]);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;i++) {tmp = a[i] + i;a[i] = tmp;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB029-truedep1-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "63",
+			"start_line": "64",
+			"end_line": "64",
+			"kernel": "a[i + 1] = a[i] + 1;",
+			"function": "int main(int argc,char *argv[]){int i;int len = 100;int a[100];for(i = 0;i < len;i++) a[i] = i;#pragma omp parallel forfor(i = 0;i < len - 1;i++) a[i + 1] = a[i] + 1;printf(\"a[50]=%d\n\",a[50]);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len - 1;i++) a[i + 1] = a[i] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB030-truedep1-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "67",
+			"start_line": "68",
+			"end_line": "68",
+			"kernel": "a[i + 1] = a[i] + 1;",
+			"function": "int main(int argc,char *argv[]){int i;int len = 100;if(argc > 1) len = atoi(argv[1]);int a[len];for(i = 0;i < len;i++) a[i] = i;#pragma omp parallel forfor(i = 0;i < len - 1;i++) a[i + 1] = a[i] + 1;return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len - 1;i++) a[i + 1] = a[i] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB031-truedepfirstdimension-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private(j)",
+			"abs_start_line": "64",
+			"start_line": "65",
+			"end_line": "66",
+			"kernel": "for(j = 1;j < m;j++) b[i][j] = b[i - 1][j - 1];",
+			"function": "int main(int argc,char *argv[]){int i;int j;int n = 1000;int m = 1000;double b[1000][1000];for(i = 0;i < n;i++) for(j = 0;j < m;j++) b[i][j] = 0.5;#pragma omp parallel for private(j)for(i = 1;i < n;i++) for(j = 1;j < m;j++) b[i][j] = b[i - 1][j - 1];printf(\"b[500][500]=%f\n\",b[500][500]);return 0;}",
+			"pragma": "omp parallel for private(j)\nfor(i = 1;i < n;i++) for(j = 1;j < m;j++) b[i][j] = b[i - 1][j - 1];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB032-truedepfirstdimension-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private(j)",
+			"abs_start_line": "67",
+			"start_line": "68",
+			"end_line": "69",
+			"kernel": "for(j = 1;j < m;j++) b[i][j] = b[i - 1][j - 1];",
+			"function": "int main(int argc,char *argv[]){int i;int j;int len = 1000;if(argc > 1) len = atoi(argv[1]);int n = len;int m = len;double b[len][len];for(i = 0;i < n;i++) for(j = 0;j < m;j++) b[i][j] = 0.5;#pragma omp parallel for private(j)for(i = 1;i < n;i++) for(j = 1;j < m;j++) b[i][j] = b[i - 1][j - 1];return 0;}",
+			"pragma": "omp parallel for private(j)\nfor(i = 1;i < n;i++) for(j = 1;j < m;j++) b[i][j] = b[i - 1][j - 1];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB033-truedeplinear-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "63",
+			"start_line": "64",
+			"end_line": "64",
+			"kernel": "a[2 * i + 1] = a[i] + 1;",
+			"function": "int main(int argc,char *argv[]){int i;int a[2000];for(i = 0;i < 2000;i++) a[i] = i;#pragma omp parallel forfor(i = 0;i < 1000;i++) a[2 * i + 1] = a[i] + 1;printf(\"a[1001]=%d\n\",a[1001]);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < 1000;i++) a[2 * i + 1] = a[i] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB034-truedeplinear-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "65",
+			"start_line": "66",
+			"end_line": "66",
+			"kernel": "a[2 * i + 1] = a[i] + 1;",
+			"function": "int main(int argc,char *argv[]){int i;int len = 2000;if(argc > 1) len = atoi(argv[1]);int a[len];for(i = 0;i < len;i++) a[i] = i;#pragma omp parallel forfor(i = 0;i < len / 2;i++) a[2 * i + 1] = a[i] + 1;return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len / 2;i++) a[2 * i + 1] = a[i] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB035-truedepscalar-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "64",
+			"start_line": "65",
+			"end_line": "68",
+			"kernel": "{a[i] = tmp;tmp = a[i] + i;}",
+			"function": "int main(int argc,char *argv[]){int i;int tmp;tmp = 10;int len = 100;int a[100];#pragma omp parallel forfor(i = 0;i < len;i++) {a[i] = tmp;tmp = a[i] + i;}printf(\"a[50]=%d\n\",a[50]);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;i++) {a[i] = tmp;tmp = a[i] + i;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB036-truedepscalar-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "65",
+			"start_line": "66",
+			"end_line": "69",
+			"kernel": "{a[i] = tmp;tmp = a[i] + i;}",
+			"function": "int main(int argc,char *argv[]){int i;int tmp;tmp = 10;int len = 100;if(argc > 1) len = atoi(argv[1]);int a[len];#pragma omp parallel forfor(i = 0;i < len;i++) {a[i] = tmp;tmp = a[i] + i;}return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;i++) {a[i] = tmp;tmp = a[i] + i;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB037-truedepseconddimension-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "62",
+			"start_line": "63",
+			"end_line": "63",
+			"kernel": "b[i][j] = b[i][j - 1];",
+			"function": "int main(int argc,char *argv[]){int i;int j;int n = 1000;int m = 1000;for(i = 0;i < n;i++) {#pragma omp parallel forfor(j = 1;j < m;j++) b[i][j] = b[i][j - 1];}printf(\"b[500][500]=%f\n\",b[500][500]);return 0;}",
+			"pragma": "omp parallel for\nfor(j = 1;j < m;j++) b[i][j] = b[i][j - 1];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB038-truedepseconddimension-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "64",
+			"start_line": "65",
+			"end_line": "65",
+			"kernel": "b[i][j] = b[i][j - 1];",
+			"function": "int main(int argc,char *argv[]){int i;int j;int len = 1000;if(argc > 1) len = atoi(argv[1]);int n = len;int m = len;double b[n][m];for(i = 0;i < n;i++) {#pragma omp parallel forfor(j = 1;j < m;j++) b[i][j] = b[i][j - 1];}return 0;}",
+			"pragma": "omp parallel for\nfor(j = 1;j < m;j++) b[i][j] = b[i][j - 1];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB039-truedepsingleelement-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "61",
+			"start_line": "62",
+			"end_line": "62",
+			"kernel": "a[i] = a[i] + a[0];",
+			"function": "int main(int argc,char *argv[]){int len = 1000;int i;int a[1000];a[0] = 2;#pragma omp parallel forfor(i = 0;i < len;i++) a[i] = a[i] + a[0];printf(\"a[500]=%d\n\",a[500]);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;i++) a[i] = a[i] + a[0];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB040-truedepsingleelement-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "62",
+			"start_line": "63",
+			"end_line": "63",
+			"kernel": "a[i] = a[i] + a[0];",
+			"function": "int main(int argc,char *argv[]){int len = 1000;int i;if(argc > 1) len = atoi(argv[1]);int a[len];a[0] = 2;#pragma omp parallel forfor(i = 0;i < len;i++) a[i] = a[i] + a[0];return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;i++) a[i] = a[i] + a[0];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB045-doall1-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "55",
+			"start_line": "56",
+			"end_line": "56",
+			"kernel": "a[i] = a[i] + 1;",
+			"function": "int main(){int i;#pragma omp parallel forfor(i = 0;i < 100;i++) a[i] = a[i] + 1;return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < 100;i++) a[i] = a[i] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB046-doall2-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private(j)",
+			"abs_start_line": "59",
+			"start_line": "60",
+			"end_line": "61",
+			"kernel": "for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;",
+			"function": "int main(){int i;int j;#pragma omp parallel for private(j)for(i = 0;i < 100;i++) for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;return 0;}",
+			"pragma": "omp parallel for private(j)\nfor(i = 0;i < 100;i++) for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB047-doallchar-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "58",
+			"start_line": "59",
+			"end_line": "59",
+			"kernel": "a[i] =(a[i] + 1);",
+			"function": "int main(){int i;#pragma omp parallel forfor(i = 0;i < 100;i++) a[i] =(a[i] + 1);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < 100;i++) a[i] =(a[i] + 1);\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB048-firstprivate-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for firstprivate (g)",
+			"abs_start_line": "55",
+			"start_line": "56",
+			"end_line": "58",
+			"kernel": "{a[i] = a[i] + g;}",
+			"function": "void foo(int *a,int n,int g){int i;#pragma omp parallel for firstprivate(g)for(i = 0;i < n;i++) {a[i] = a[i] + g;}}",
+			"pragma": "omp parallel for firstprivate (g)\nfor(i = 0;i < n;i++) {a[i] = a[i] + g;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB049-fprintf-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "70",
+			"start_line": "71",
+			"end_line": "73",
+			"kernel": "{fprintf(pfile,\"%d\n\",A[i]);}",
+			"function": "int main(int argc,char *argv[]){int i;int ret;FILE *pfile;int len = 1000;int A[1000];for(i = 0;i < len;i++) A[i] = i;pfile = fopen(\"mytempfile.txt\",\"a+\");if(pfile ==((void *)0)) {fprintf(stderr,\"Error in fopen()\n\");}#pragma omp parallel forfor(i = 0;i < len;++i) {fprintf(pfile,\"%d\n\",A[i]);}fclose(pfile);ret = remove(\"mytempfile.txt\");if(ret != 0) {fprintf(stderr,\"Error: unable to delete mytempfile.txt\n\");}return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;++i) {fprintf(pfile,\"%d\n\",A[i]);}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB050-functionparameter-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "54",
+			"start_line": "55",
+			"end_line": "57",
+			"kernel": "{double volnew_o8 = 0.5 * c[i];o1[i] = volnew_o8;}",
+			"function": "void foo1(double o1[],double c[],int len){int i;#pragma omp parallel forfor(i = 0;i < len;++i) {double volnew_o8 = 0.5 * c[i];o1[i] = volnew_o8;}}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;++i) {double volnew_o8 = 0.5 * c[i];o1[i] = volnew_o8;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB051-getthreadnum-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB052-indirectaccesssharebase-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "116",
+			"start_line": "117",
+			"end_line": "121",
+			"kernel": "{int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}",
+			"function": "int main(int argc,char *argv[]){double *base =(double *)(malloc(sizeof(double ) *(2013 + 12 + 1)));if(base == 0) {printf(\"Error, malloc() returns NULL. End execution. \n\");return 1;}double *xa1 = base;double *xa2 = base + 12;int i;for(i = 521;i <= 2025;++i) {base[i] = 0.0;}#pragma omp parallel forfor(i = 0;i < 180;++i) {int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}for(i = 521;i <= 2025;++i) {(((void )(sizeof(((base[i] != 4.0?1 : 0))))) ,(({if(base[i] != 4.0) ;else __assert_fail(\"base[i]!=4.0\",\"DRB052-indirectaccesssharebase-orig-no.c\",127,__PRETTY_FUNCTION__);})));}free(base);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < 180;++i) {int idx = indexSet[i];xa1[idx] += 1.0;xa2[idx] += 3.0;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB053-inneronly1-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "61",
+			"start_line": "62",
+			"end_line": "63",
+			"kernel": "{a[i][j] += a[i + 1][j];}",
+			"function": "int main(int argc,char *argv[]){int i;int j;double a[20][20];memset(a,0,sizeof(a));for(i = 0;i < 20 - 1;i += 1) {#pragma omp parallel forfor(j = 0;j < 20;j += 1) {a[i][j] += a[i + 1][j];}}return 0;}",
+			"pragma": "omp parallel for\nfor(j = 0;j < 20;j += 1) {a[i][j] += a[i + 1][j];}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB054-inneronly2-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "63",
+			"start_line": "64",
+			"end_line": "64",
+			"kernel": "b[i][j] = b[i - 1][j - 1];",
+			"function": "int main(){int i;int j;int n = 100;int m = 100;double b[n][m];for(i = 0;i < n;i++) for(j = 0;j < n;j++) b[i][j] =((double )(i * j));for(i = 1;i < n;i++) {#pragma omp parallel forfor(j = 1;j < m;j++) b[i][j] = b[i - 1][j - 1];}return 0;}",
+			"pragma": "omp parallel for\nfor(j = 1;j < m;j++) b[i][j] = b[i - 1][j - 1];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB059-lastprivate-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private (i) lastprivate (x)",
+			"abs_start_line": "60",
+			"start_line": "61",
+			"end_line": "61",
+			"kernel": "x = i;",
+			"function": "void foo(){int i;int x;#pragma omp parallel for private(i) lastprivate(x)for(i = 0;i < 100;i++) x = i;printf(\"x=%d\",x);}",
+			"pragma": "omp parallel for private (i) lastprivate (x)\nfor(i = 0;i < 100;i++) x = i;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB060-matrixmultiply-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private(j,k)",
+			"abs_start_line": "60",
+			"start_line": "61",
+			"end_line": "63",
+			"kernel": "for(k = 0;k < 100;k++) for(j = 0;j < 100;j++) c[i][j] = c[i][j] + a[i][k] * b[k][j];",
+			"function": "int mmm(){int i;int j;int k;#pragma omp parallel for private(j,k)for(i = 0;i < 100;i++) for(k = 0;k < 100;k++) for(j = 0;j < 100;j++) c[i][j] = c[i][j] + a[i][k] * b[k][j];return 0;}",
+			"pragma": "omp parallel for private(j,k)\nfor(i = 0;i < 100;i++) for(k = 0;k < 100;k++) for(j = 0;j < 100;j++) c[i][j] = c[i][j] + a[i][k] * b[k][j];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB061-matrixvector1-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private (i,j)",
+			"abs_start_line": "57",
+			"start_line": "58",
+			"end_line": "65",
+			"kernel": "{float sum = 0.0;for(j = 0;j < 100;j++) {sum += a[i][j] * v[j];}v_out[i] = sum;}",
+			"function": "int mv(){int i;int j;#pragma omp parallel for private(i,j)for(i = 0;i < 100;i++) {float sum = 0.0;for(j = 0;j < 100;j++) {sum += a[i][j] * v[j];}v_out[i] = sum;}return 0;}",
+			"pragma": "omp parallel for private (i,j)\nfor(i = 0;i < 100;i++) {float sum = 0.0;for(j = 0;j < 100;j++) {sum += a[i][j] * v[j];}v_out[i] = sum;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB062-matrixvector2-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for reduction(+:sum)",
+			"abs_start_line": "60",
+			"start_line": "61",
+			"end_line": "63",
+			"kernel": "{sum += a[i][j] * v[j];}",
+			"function": "void mv(){int i;int j;for(i = 0;i < 1000;i++) {float sum = 0.0;#pragma omp parallel for reduction(+:sum)for(j = 0;j < 1000;j++) {sum += a[i][j] * v[j];}v_out[i] = sum;}}",
+			"pragma": "omp parallel for reduction(+:sum)\nfor(j = 0;j < 1000;j++) {sum += a[i][j] * v[j];}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB063-outeronly1-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private(j)",
+			"abs_start_line": "58",
+			"start_line": "59",
+			"end_line": "60",
+			"kernel": "for(j = 0;j < m - 1;j++) b[i][j] = b[i][j + 1];",
+			"function": "void foo(){int i;int j;#pragma omp parallel for private(j)for(i = 0;i < n;i++) for(j = 0;j < m - 1;j++) b[i][j] = b[i][j + 1];}",
+			"pragma": "omp parallel for private(j)\nfor(i = 0;i < n;i++) for(j = 0;j < m - 1;j++) b[i][j] = b[i][j + 1];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB064-outeronly2-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private(j)",
+			"abs_start_line": "60",
+			"start_line": "61",
+			"end_line": "62",
+			"kernel": "for(j = 1;j < m;j++) b[i][j] = b[i][j - 1];",
+			"function": "void foo(){int i;int j;#pragma omp parallel for private(j)for(i = 0;i < n;i++) for(j = 1;j < m;j++) b[i][j] = b[i][j - 1];}",
+			"pragma": "omp parallel for private(j)\nfor(i = 0;i < n;i++) for(j = 1;j < m;j++) b[i][j] = b[i][j - 1];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB065-pireduction-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for reduction(+:pi) private(x)",
+			"abs_start_line": "62",
+			"start_line": "63",
+			"end_line": "65",
+			"kernel": "{x =(i + 0.5) * interval_width;pi += 1.0 /(x * x + 1.0);}",
+			"function": "int main(int argc,char **argv){double pi = 0.0;long i;double x;double interval_width;interval_width = 1.0 /((double )2000000000);#pragma omp parallel for reduction(+:pi) private(x)for(i = 0;i < 2000000000;i++) {x =(i + 0.5) * interval_width;pi += 1.0 /(x * x + 1.0);}pi = pi * 4.0 * interval_width;printf(\"PI=%f\n\",pi);return 0;}",
+			"pragma": "omp parallel for reduction(+:pi) private(x)\nfor(i = 0;i < 2000000000;i++) {x =(i + 0.5) * interval_width;pi += 1.0 /(x * x + 1.0);}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB066-pointernoaliasing-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for schedule(static)",
+			"abs_start_line": "57",
+			"start_line": "58",
+			"end_line": "61",
+			"kernel": "{m_pdv_sum[i] = 0.0;m_nvol[i] = i * 2.5;}",
+			"function": "void setup(int N){double *m_pdv_sum =(double *)(malloc(sizeof(double ) * N));double *m_nvol =(double *)(malloc(sizeof(double ) * N));#pragma omp parallel for schedule(static)for(int i = 0;i < N;++i) {m_pdv_sum[i] = 0.0;m_nvol[i] = i * 2.5;}free(m_pdv_sum);free(m_nvol);}",
+			"pragma": "omp parallel for schedule(static)\nfor(int i = 0;i < N;++i) {m_pdv_sum[i] = 0.0;m_nvol[i] = i * 2.5;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB067-restrictpointer1-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private (i) firstprivate (length)",
+			"abs_start_line": "62",
+			"start_line": "63",
+			"end_line": "65",
+			"kernel": "{newSxx[i] = 0.0;newSyy[i] = 0.0;}",
+			"function": "void foo(real8 * __restrict__ newSxx,real8 * __restrict__ newSyy,int length){int i;#pragma omp parallel for private(i) firstprivate(length)for(i = 0;i <= length - 1;i += 1) {newSxx[i] = 0.0;newSyy[i] = 0.0;}}",
+			"pragma": "omp parallel for private (i) firstprivate (length)\nfor(i = 0;i <= length - 1;i += 1) {newSxx[i] = 0.0;newSyy[i] = 0.0;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB068-restrictpointer2-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "62",
+			"start_line": "63",
+			"end_line": "63",
+			"kernel": "a[i] = b[i] + c[i];",
+			"function": "void foo(int n,int * __restrict__ a,int * __restrict__ b,int * __restrict__ c){int i;#pragma omp parallel forfor(i = 0;i < n;i++) a[i] = b[i] + c[i];}",
+			"pragma": "omp parallel for\nfor(i = 0;i < n;i++) a[i] = b[i] + c[i];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB069-sectionslock1-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel sections",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp section",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp section",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB070-simd1-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp simd",
+			"abs_start_line": "55",
+			"start_line": "56",
+			"end_line": "56",
+			"kernel": "a[i] = b[i] * c[i];",
+			"function": "int main(){int i;#pragma omp simdfor(i = 0;i < 100;i++) a[i] = b[i] * c[i];return 0;}",
+			"pragma": "omp simd\nfor(i = 0;i < 100;i++) a[i] = b[i] * c[i];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB071-targetparallelfor-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(a[0:len])",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "61",
+			"start_line": "62",
+			"end_line": "62",
+			"kernel": "a[i] = a[i] + 1;",
+			"function": "int main(int argc,char *argv[]){int i;int len = 1000;int a[len];for(i = 0;i < len;i++) a[i] = i;#pragma omp target map(a[0:len])#pragma omp parallel forfor(i = 0;i < len;i++) a[i] = a[i] + 1;return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;i++) a[i] = a[i] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB072-taskdep1-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend (out:i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend (in:i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB073-doall2-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "60",
+			"start_line": "61",
+			"end_line": "62",
+			"kernel": "for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;",
+			"function": "int main(){int i;int j;#pragma omp parallel forfor(i = 0;i < 100;i++) for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < 100;i++) for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB074-flush-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp critical",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp flush",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel reduction(+:sum) num_threads(10)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB075-getthreadnum-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB076-flush-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel reduction(+:sum) num_threads(10) private(i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB077-single-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel shared(count)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB078-taskdep2-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend (out:i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend (out:i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB079-taskdep3-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend (out:i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend (in:i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend (in:i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB080-func-arg-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB081-func-arg-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB082-declared-in-func-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB083-declared-in-func-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB084-threadprivatemissing-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for",
+			"abs_start_line": "70",
+			"start_line": "71",
+			"end_line": "73",
+			"kernel": "{foo(i);}",
+			"function": "int main(){int i;int sum = 0;#pragma omp parallel{#pragma omp forfor(i = 1;i <= 1000;i++) {foo(i);}#pragma omp critical{sum = sum + sum0;}}for(i = 1;i <= 1000;i++) {sum1 = sum1 + i;}printf(\"sum=%d;sum1=%d\n\",sum,sum1);return 0;}",
+			"pragma": "omp for\nfor(i = 1;i <= 1000;i++) {foo(i);}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB085-threadprivate-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp threadprivate(sum0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel copyin(sum0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for",
+			"abs_start_line": "69",
+			"start_line": "70",
+			"end_line": "72",
+			"kernel": "{foo(i);}",
+			"function": "int main(){int len = 1000;int i;int sum = 0;#pragma omp parallel copyin(sum0){#pragma omp forfor(i = 0;i < len;i++) {foo(i);}#pragma omp critical{sum = sum + sum0;}}for(i = 0;i < len;i++) {sum1 = sum1 + i;}printf(\"sum=%d;sum1=%d\n\",sum,sum1);(((void )(sizeof(((sum == sum1?1 : 0))))) ,(({if(sum == sum1) ;else __assert_fail(\"sum==sum1\",\"DRB085-threadprivate-orig-no.c\",84,__PRETTY_FUNCTION__);})));return 0;}",
+			"pragma": "omp for\nfor(i = 0;i < len;i++) {foo(i);}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB088-dynamic-storage-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB089-dynamic-storage2-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB090-static-local-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for",
+			"abs_start_line": "71",
+			"start_line": "72",
+			"end_line": "75",
+			"kernel": "{tmp = a[i] + i;a[i] = tmp;}",
+			"function": "int main(int argc,char *argv[]){int i;int len = 100;int a[len];int b[len];for(i = 0;i < len;i++) {a[i] = i;b[i] = i;}#pragma omp parallel{static int tmp;#pragma omp forfor(i = 0;i < len;i++) {tmp = a[i] + i;a[i] = tmp;}}#pragma omp parallel{int tmp;#pragma omp forfor(i = 0;i < len;i++) {tmp = b[i] + i;b[i] = tmp;}}printf(\"a[50]=%d b[50]=%d\n\",a[50],b[50]);return 0;}",
+			"pragma": "omp for\nfor(i = 0;i < len;i++) {tmp = a[i] + i;a[i] = tmp;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for",
+			"abs_start_line": "83",
+			"start_line": "84",
+			"end_line": "87",
+			"kernel": "{tmp = b[i] + i;b[i] = tmp;}",
+			"function": "int main(int argc,char *argv[]){int i;int len = 100;int a[len];int b[len];for(i = 0;i < len;i++) {a[i] = i;b[i] = i;}#pragma omp parallel{static int tmp;#pragma omp forfor(i = 0;i < len;i++) {tmp = a[i] + i;a[i] = tmp;}}#pragma omp parallel{int tmp;#pragma omp forfor(i = 0;i < len;i++) {tmp = b[i] + i;b[i] = tmp;}}printf(\"a[50]=%d b[50]=%d\n\",a[50],b[50]);return 0;}",
+			"pragma": "omp for\nfor(i = 0;i < len;i++) {tmp = b[i] + i;b[i] = tmp;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB091-threadprivate2-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp threadprivate(sum0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel copyin(sum0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for",
+			"abs_start_line": "65",
+			"start_line": "66",
+			"end_line": "68",
+			"kernel": "{sum0 = sum0 + i;}",
+			"function": "int main(){int len = 1000;int i;int sum = 0;#pragma omp parallel copyin(sum0){#pragma omp forfor(i = 0;i < len;i++) {sum0 = sum0 + i;}#pragma omp critical{sum = sum + sum0;}}for(i = 0;i < len;i++) {sum1 = sum1 + i;}printf(\"sum=%d;sum1=%d\n\",sum,sum1);(((void )(sizeof(((sum == sum1?1 : 0))))) ,(({if(sum == sum1) ;else __assert_fail(\"sum==sum1\",\"DRB091-threadprivate2-orig-no.c\",80,__PRETTY_FUNCTION__);})));return 0;}",
+			"pragma": "omp for\nfor(i = 0;i < len;i++) {sum0 = sum0 + i;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB092-threadprivatemissing2-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for",
+			"abs_start_line": "66",
+			"start_line": "67",
+			"end_line": "69",
+			"kernel": "{sum0 = sum0 + i;}",
+			"function": "int main(){int i;int sum = 0;#pragma omp parallel{#pragma omp forfor(i = 1;i <= 1000;i++) {sum0 = sum0 + i;}#pragma omp critical{sum = sum + sum0;}}for(i = 1;i <= 1000;i++) {sum1 = sum1 + i;}printf(\"sum=%d;sum1=%d\n\",sum,sum1);return 0;}",
+			"pragma": "omp for\nfor(i = 1;i <= 1000;i++) {sum0 = sum0 + i;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB093-doall2-collapse-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for collapse(2)",
+			"abs_start_line": "57",
+			"start_line": "58",
+			"end_line": "59",
+			"kernel": "for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;",
+			"function": "int main(){int i;int j;#pragma omp parallel for collapse(2)for(i = 0;i < 100;i++) for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;return 0;}",
+			"pragma": "omp parallel for collapse(2)\nfor(i = 0;i < 100;i++) for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB097-target-teams-distribute-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(to: a[0:len], b[0:len]) map(tofrom: sum)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams num_teams(10) thread_limit(256) reduction (+:sum)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp distribute",
+			"abs_start_line": "68",
+			"start_line": "69",
+			"end_line": "71",
+			"kernel": "{#pragma omp parallel for reduction(+:sum)for(i = i2;i <((i2 + 256 < len?i2 + 256 : len));i++) sum += a[i] * b[i];}",
+			"function": "int main(int argc,char *argv[]){int i;int i2;int len = 2560;double sum = 0.0;double sum2 = 0.0;double a[len];double b[len];for(i = 0;i < len;i++) {a[i] =((double )i) / 2.0;b[i] =((double )i) / 3.0;}#pragma omp target map(to: a[0:len], b[0:len]) map(tofrom: sum)#pragma omp teams num_teams(10) thread_limit(256) reduction(+:sum)#pragma omp distributefor(i2 = 0;i2 < len;i2 += 256) {#pragma omp parallel for reduction(+:sum)for(i = i2;i <((i2 + 256 < len?i2 + 256 : len));i++) sum += a[i] * b[i];}#pragma omp parallel for reduction(+:sum2)for(i = 0;i < len;i++) sum2 += a[i] * b[i];printf(\"sum=%f sum2=%f\n\",sum,sum2);return 0;}",
+			"pragma": "omp distribute\nfor(i2 = 0;i2 < len;i2 += 256) {#pragma omp parallel for reduction(+:sum)for(i = i2;i <((i2 + 256 < len?i2 + 256 : len));i++) sum += a[i] * b[i];}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel for reduction (+:sum)",
+			"abs_start_line": "70",
+			"start_line": "71",
+			"end_line": "71",
+			"kernel": "sum += a[i] * b[i];",
+			"function": "int main(int argc,char *argv[]){int i;int i2;int len = 2560;double sum = 0.0;double sum2 = 0.0;double a[len];double b[len];for(i = 0;i < len;i++) {a[i] =((double )i) / 2.0;b[i] =((double )i) / 3.0;}#pragma omp target map(to: a[0:len], b[0:len]) map(tofrom: sum)#pragma omp teams num_teams(10) thread_limit(256) reduction(+:sum)#pragma omp distributefor(i2 = 0;i2 < len;i2 += 256) {#pragma omp parallel for reduction(+:sum)for(i = i2;i <((i2 + 256 < len?i2 + 256 : len));i++) sum += a[i] * b[i];}#pragma omp parallel for reduction(+:sum2)for(i = 0;i < len;i++) sum2 += a[i] * b[i];printf(\"sum=%f sum2=%f\n\",sum,sum2);return 0;}",
+			"pragma": "omp parallel for reduction (+:sum)\nfor(i = i2;i <((i2 + 256 < len?i2 + 256 : len));i++) sum += a[i] * b[i];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel for reduction (+:sum2)",
+			"abs_start_line": "75",
+			"start_line": "76",
+			"end_line": "76",
+			"kernel": "sum2 += a[i] * b[i];",
+			"function": "int main(int argc,char *argv[]){int i;int i2;int len = 2560;double sum = 0.0;double sum2 = 0.0;double a[len];double b[len];for(i = 0;i < len;i++) {a[i] =((double )i) / 2.0;b[i] =((double )i) / 3.0;}#pragma omp target map(to: a[0:len], b[0:len]) map(tofrom: sum)#pragma omp teams num_teams(10) thread_limit(256) reduction(+:sum)#pragma omp distributefor(i2 = 0;i2 < len;i2 += 256) {#pragma omp parallel for reduction(+:sum)for(i = i2;i <((i2 + 256 < len?i2 + 256 : len));i++) sum += a[i] * b[i];}#pragma omp parallel for reduction(+:sum2)for(i = 0;i < len;i++) sum2 += a[i] * b[i];printf(\"sum=%f sum2=%f\n\",sum,sum2);return 0;}",
+			"pragma": "omp parallel for reduction (+:sum2)\nfor(i = 0;i < len;i++) sum2 += a[i] * b[i];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB098-simd2-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp simd collapse(2)",
+			"abs_start_line": "67",
+			"start_line": "68",
+			"end_line": "69",
+			"kernel": "for(j = 0;j < len;j++) c[i][j] = a[i][j] * b[i][j];",
+			"function": "int main(){int len = 100;double a[len][len];double b[len][len];double c[len][len];int i;int j;for(i = 0;i < len;i++) for(j = 0;j < len;j++) {a[i][j] =((double )i) / 2.0;b[i][j] =((double )i) / 3.0;c[i][j] =((double )i) / 7.0;}#pragma omp simd collapse(2)for(i = 0;i < len;i++) for(j = 0;j < len;j++) c[i][j] = a[i][j] * b[i][j];printf(\"c[50][50]=%f\n\",c[50][50]);return 0;}",
+			"pragma": "omp simd collapse(2)\nfor(i = 0;i < len;i++) for(j = 0;j < len;j++) c[i][j] = a[i][j] * b[i][j];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB099-targetparallelfor2-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(to:a[0:N]) map(from:b[0:N])",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "55",
+			"start_line": "56",
+			"end_line": "56",
+			"kernel": "b[i] = a[i] *((double )i);",
+			"function": "void foo(double *a,double *b,int N){int i;#pragma omp target map(to:a[0:N]) map(from:b[0:N])#pragma omp parallel forfor(i = 0;i < N;i++) b[i] = a[i] *((double )i);}",
+			"pragma": "omp parallel for\nfor(i = 0;i < N;i++) b[i] = a[i] *((double )i);\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB102-copyprivate-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp threadprivate(x,y)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single copyprivate(x,y)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB103-master-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp master",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB104-nowait-barrier-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel shared(b, error)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for nowait",
+			"abs_start_line": "67",
+			"start_line": "68",
+			"end_line": "68",
+			"kernel": "a[i] = b + a[i] * 5;",
+			"function": "int main(){int i;int error;int len = 1000;int a[len];int b = 5;for(i = 0;i < len;i++) a[i] = i;#pragma omp parallel shared(b, error){#pragma omp for nowaitfor(i = 0;i < len;i++) a[i] = b + a[i] * 5;#pragma omp barrier#pragma omp singleerror = a[9] + 1;}(((void )(sizeof(((error == 51?1 : 0))))) ,(({if(error == 51) ;else __assert_fail(\"error == 51\",\"DRB104-nowait-barrier-orig-no.c\",75,__PRETTY_FUNCTION__);})));printf(\"error = %d\n\",error);return 0;}",
+			"pragma": "omp for nowait\nfor(i = 0;i < len;i++) a[i] = b + a[i] * 5;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp barrier",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB105-taskwait-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp task shared(i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(j)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB106-taskwaitmissing-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp task shared(i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(j)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB107-taskgroup-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskgroup",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB108-atomic-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp atomic",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB109-orderedmissing-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for ordered",
+			"abs_start_line": "55",
+			"start_line": "56",
+			"end_line": "57",
+			"kernel": "{x++;}",
+			"function": "int main(){int x = 0;#pragma omp parallel for orderedfor(int i = 0;i < 100;++i) {x++;}printf(\"x=%d\n\",x);return 0;}",
+			"pragma": "omp parallel for ordered\nfor(int i = 0;i < 100;++i) {x++;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB110-ordered-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for ordered",
+			"abs_start_line": "55",
+			"start_line": "56",
+			"end_line": "60",
+			"kernel": "{#pragma omp ordered{x++;}}",
+			"function": "int main(){int x = 0;#pragma omp parallel for orderedfor(int i = 0;i < 100;++i) {#pragma omp ordered{x++;}}(((void )(sizeof(((x == 100?1 : 0))))) ,(({if(x == 100) ;else __assert_fail(\"x==100\",\"DRB110-ordered-orig-no.c\",61,__PRETTY_FUNCTION__);})));printf(\"x=%d\n\",x);return 0;}",
+			"pragma": "omp parallel for ordered\nfor(int i = 0;i < 100;++i) {#pragma omp ordered{x++;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp ordered",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB111-linearmissing-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for",
+			"abs_start_line": "68",
+			"start_line": "69",
+			"end_line": "72",
+			"kernel": "{c[j] += a[i] * b[i];j++;}",
+			"function": "int main(){int len = 100;double a[len];double b[len];double c[len];int i;int j = 0;for(i = 0;i < len;i++) {a[i] =((double )i) / 2.0;b[i] =((double )i) / 3.0;c[i] =((double )i) / 7.0;}#pragma omp parallel forfor(i = 0;i < len;i++) {c[j] += a[i] * b[i];j++;}printf(\"c[50]=%f\n\",c[50]);return 0;}",
+			"pragma": "omp parallel for\nfor(i = 0;i < len;i++) {c[j] += a[i] * b[i];j++;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB113-default-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for default(none) shared(a) private(i,j)",
+			"abs_start_line": "59",
+			"start_line": "60",
+			"end_line": "61",
+			"kernel": "for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;",
+			"function": "int main(){int i;int j;#pragma omp parallel for default(none) shared(a) private(i,j)for(i = 0;i < 100;i++) for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;#pragma omp parallel for default(shared) private(i,j)for(i = 0;i < 100;i++) for(j = 0;j < 100;j++) b[i][j] = b[i][j] + 1;return 0;}",
+			"pragma": "omp parallel for default(none) shared(a) private(i,j)\nfor(i = 0;i < 100;i++) for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel for default(shared) private(i,j)",
+			"abs_start_line": "64",
+			"start_line": "65",
+			"end_line": "66",
+			"kernel": "for(j = 0;j < 100;j++) b[i][j] = b[i][j] + 1;",
+			"function": "int main(){int i;int j;#pragma omp parallel for default(none) shared(a) private(i,j)for(i = 0;i < 100;i++) for(j = 0;j < 100;j++) a[i][j] = a[i][j] + 1;#pragma omp parallel for default(shared) private(i,j)for(i = 0;i < 100;i++) for(j = 0;j < 100;j++) b[i][j] = b[i][j] + 1;return 0;}",
+			"pragma": "omp parallel for default(shared) private(i,j)\nfor(i = 0;i < 100;i++) for(j = 0;j < 100;j++) b[i][j] = b[i][j] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB114-if-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for if (rand()%2)",
+			"abs_start_line": "65",
+			"start_line": "66",
+			"end_line": "66",
+			"kernel": "a[i + 1] = a[i] + 1;",
+			"function": "int main(int argc,char *argv[]){int i;int len = 100;int a[100];for(i = 0;i < len;i++) a[i] = i;srand((time(((void *)0))));#pragma omp parallel for if(rand()%2)for(i = 0;i < len - 1;i++) a[i + 1] = a[i] + 1;printf(\"a[50]=%d\n\",a[50]);return 0;}",
+			"pragma": "omp parallel for if (rand()%2)\nfor(i = 0;i < len - 1;i++) a[i + 1] = a[i] + 1;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB115-forsimd-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for simd",
+			"abs_start_line": "65",
+			"start_line": "66",
+			"end_line": "66",
+			"kernel": "a[i + 1] = a[i] + b[i];",
+			"function": "int main(int argc,char *argv[]){int i;int len = 100;int a[100];int b[100];for(i = 0;i < len;i++) {a[i] = i;b[i] = i + 1;}#pragma omp parallel for simdfor(i = 0;i < len - 1;i++) a[i + 1] = a[i] + b[i];printf(\"a[50]=%d\n\",a[50]);return 0;}",
+			"pragma": "omp parallel for simd\nfor(i = 0;i < len - 1;i++) a[i + 1] = a[i] + b[i];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB116-target-teams-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom: a[0:len])",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams num_teams(2)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB117-taskwait-waitonlychild-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel num_threads(2)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for schedule(dynamic, 1)",
+			"abs_start_line": "29",
+			"start_line": "30",
+			"end_line": "33",
+			"kernel": "{a[i] = i;int s;s =(- 3 - 3) / - 3;}",
+			"function": "int main(){int a[4];int psum[2];int sum;#pragma omp parallel num_threads(2){#pragma omp for schedule(dynamic, 1)for(int i = 0;i < 4;++i) {a[i] = i;int s;s =(- 3 - 3) / - 3;}#pragma omp single{#pragma omp task{#pragma omp task{psum[1] = a[2] + a[3];}psum[0] = a[0] + a[1];}#pragma omp taskwaitsum = psum[1] + psum[0];}}printf(\"sum = %d\n\",sum);return 0;}",
+			"pragma": "omp for schedule(dynamic, 1)\nfor(int i = 0;i < 4;++i) {a[i] = i;int s;s =(- 3 - 3) / - 3;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB118-nestlock-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel sections",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp section",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp section",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB119-nestlock-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel sections",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp section",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp section",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB120-barrier-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel shared(var)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp barrier",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB121-reduction-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel reduction(+: var)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for schedule(static) reduction(+: sum1)",
+			"abs_start_line": "31",
+			"start_line": "32",
+			"end_line": "32",
+			"kernel": "sum1 += i;",
+			"function": "int main(int argc,char *argv[]){int var = 0;int i;int res;int sum1 = 0;int sum2 = 0;res = omp_get_max_threads();#pragma omp parallel reduction(+: var){#pragma omp for schedule(static) reduction(+: sum1)for(i = 0;i < 5;i++) sum1 += i;#pragma omp for schedule(static) reduction(+: sum2)for(i = 0;i < 5;i++) sum2 += i;var = sum1 + sum2;}int error = var != 20 * res;if(error) printf(\"%d %d\n\",var,20 * res);return error;}",
+			"pragma": "omp for schedule(static) reduction(+: sum1)\nfor(i = 0;i < 5;i++) sum1 += i;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for schedule(static) reduction(+: sum2)",
+			"abs_start_line": "34",
+			"start_line": "35",
+			"end_line": "35",
+			"kernel": "sum2 += i;",
+			"function": "int main(int argc,char *argv[]){int var = 0;int i;int res;int sum1 = 0;int sum2 = 0;res = omp_get_max_threads();#pragma omp parallel reduction(+: var){#pragma omp for schedule(static) reduction(+: sum1)for(i = 0;i < 5;i++) sum1 += i;#pragma omp for schedule(static) reduction(+: sum2)for(i = 0;i < 5;i++) sum2 += i;var = sum1 + sum2;}int error = var != 20 * res;if(error) printf(\"%d %d\n\",var,20 * res);return error;}",
+			"pragma": "omp for schedule(static) reduction(+: sum2)\nfor(i = 0;i < 5;i++) sum2 += i;\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB122-taskundeferred-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel sections",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(var) if(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB123-taskundeferred-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel sections",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(var)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB124-master-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel shared(init) private(local)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp master",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB125-single-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel shared(init) private(local)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB126-firstprivatesections-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp sections firstprivate( section_count )",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp section",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp section",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB127-tasking-threadprivate1-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp threadprivate(tp)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB128-tasking-threadprivate2-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp threadprivate(tp)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB129-mergeable-taskwait-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp task mergeable",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB130-mergeable-taskwait-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp task shared(x) mergeable",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB131-taskdep4-orig-omp45-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp task depend(inout: x) shared(x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(y)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: x) if(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB132-taskdep4-orig-omp45-no.c",
+	"data": [
+		{
+			"pragma_string": "omp task depend(inout: x) shared(x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(y)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: x) if(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB133-taskdep5-orig-omp45-no.c",
+	"data": [
+		{
+			"pragma_string": "omp task depend(inout: x) shared(x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: x) depend(inout: y) shared(x, y)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: x) if(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB134-taskdep5-orig-omp45-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp task depend(inout: x) shared(x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: x) depend(inout: y) shared(x, y)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: x) if(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB135-taskdep-mutexinoutset-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(out: c)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(out: a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(out: b)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: a) depend(mutexinoutset: c)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: b) depend(mutexinoutset: c)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: c)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB136-taskdep-mutexinoutset-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(out: c)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(out: a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(out: b)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: b)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: c)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB137-simdsafelen-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp simd safelen(2)",
+			"abs_start_line": "25",
+			"start_line": "26",
+			"end_line": "26",
+			"kernel": "b[i] =(b[i - m] - 1.0f);",
+			"function": "int main(){int i;int m = 2;int n = 4;int b[4] = {};#pragma omp simd safelen(2)for(i = m;i < n;i++) b[i] =(b[i - m] - 1.0f);printf(\"Expected: -1;Real: %d\n\",b[3]);return 0;}",
+			"pragma": "omp simd safelen(2)\nfor(i = m;i < n;i++) b[i] =(b[i - m] - 1.0f);\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB138-simdsafelen-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp simd safelen(2)",
+			"abs_start_line": "25",
+			"start_line": "26",
+			"end_line": "26",
+			"kernel": "b[i] =(b[i - m] - 1.0f);",
+			"function": "int main(){int i;int m = 1;int n = 4;int b[4] = {};#pragma omp simd safelen(2)for(i = m;i < n;i++) b[i] =(b[i - m] - 1.0f);printf(\"Expected: -1;Real: %d\n\",b[3]);return 0;}",
+			"pragma": "omp simd safelen(2)\nfor(i = m;i < n;i++) b[i] =(b[i - m] - 1.0f);\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB139-worksharingcritical-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel sections",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp section",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical (name)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB140-reduction-barrier-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel shared(a) private(i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp master",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for reduction(+:a)",
+			"abs_start_line": "28",
+			"start_line": "29",
+			"end_line": "30",
+			"kernel": "{a = a + i;}",
+			"function": "int main(){int a;int i;#pragma omp parallel shared(a) private(i){#pragma omp mastera = 0;#pragma omp for reduction(+:a)for(i = 0;i < 10;i++) {a = a + i;}#pragma omp singleprintf(\"Sum is %d\n\",a);}return 0;}",
+			"pragma": "omp for reduction(+:a)\nfor(i = 0;i < 10;i++) {a = a + i;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB141-reduction-barrier-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel shared(a) private(i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp master",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp barrier",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for reduction(+:a)",
+			"abs_start_line": "31",
+			"start_line": "32",
+			"end_line": "33",
+			"kernel": "{a += i;}",
+			"function": "int main(){int a;int i;#pragma omp parallel shared(a) private(i){#pragma omp mastera = 0;#pragma omp barrier#pragma omp for reduction(+:a)for(i = 0;i < 10;i++) {a += i;}#pragma omp singleprintf(\"Sum is %d\n\",a);}return 0;}",
+			"pragma": "omp for reduction(+:a)\nfor(i = 0;i < 10;i++) {a += i;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB142-acquirerelease-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel num_threads(2)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp atomic write",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp atomic read acquire",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB143-acquirerelease-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel num_threads(2)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp flush(x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp atomic write",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp atomic read acquire",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB144-critical-missingreduction-orig-gpu-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute parallel for",
+			"abs_start_line": "24",
+			"start_line": "25",
+			"end_line": "27",
+			"kernel": "{#pragma omp criticalvar++;}",
+			"function": "int main(){#pragma omp target map(tofrom:var) device(0)#pragma omp teams distribute parallel forfor(int i = 0;i < 100 * 2;i++) {#pragma omp criticalvar++;}printf(\"%d\n \",var);return 0;}",
+			"pragma": "omp teams distribute parallel for\nfor(int i = 0;i < 100 * 2;i++) {#pragma omp criticalvar++;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB145-atomiccritical-orig-gpu-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute parallel for reduction(+:var)",
+			"abs_start_line": "24",
+			"start_line": "25",
+			"end_line": "26",
+			"kernel": "{var++;}",
+			"function": "int main(){#pragma omp target map(tofrom:var) device(0)#pragma omp teams distribute parallel for reduction(+:var)for(int i = 0;i < 100;i++) {var++;}printf(\"%d\n\",var);return 0;}",
+			"pragma": "omp teams distribute parallel for reduction(+:var)\nfor(int i = 0;i < 100;i++) {var++;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB146-atomicupdate-orig-gpu-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute",
+			"abs_start_line": "23",
+			"start_line": "24",
+			"end_line": "26",
+			"kernel": "{#pragma omp atomic updatevar++;}",
+			"function": "int main(){#pragma omp target map(tofrom:var) device(0)#pragma omp teams distributefor(int i = 0;i < 100;i++) {#pragma omp atomic updatevar++;}printf(\"%d\n \",var);return 0;}",
+			"pragma": "omp teams distribute\nfor(int i = 0;i < 100;i++) {#pragma omp atomic updatevar++;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp atomic update",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB147-critical1-orig-gpu-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute parallel for",
+			"abs_start_line": "27",
+			"start_line": "28",
+			"end_line": "33",
+			"kernel": "{#pragma omp atomicvar++;#pragma omp atomicvar -= 2;}",
+			"function": "int main(){#pragma omp target map(tofrom:var) device(0)#pragma omp teams distribute parallel forfor(int i = 0;i < 100;i++) {#pragma omp atomicvar++;#pragma omp atomicvar -= 2;}printf(\"%d\n\",var);return 0;}",
+			"pragma": "omp teams distribute parallel for\nfor(int i = 0;i < 100;i++) {#pragma omp atomicvar++;#pragma omp atomicvar -= 2;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp atomic",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp atomic",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB148-critical1-orig-gpu-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute parallel for",
+			"abs_start_line": "29",
+			"start_line": "30",
+			"end_line": "35",
+			"kernel": "{#pragma omp critical(addlock)var++;#pragma omp critical(sublock)var -= 2;}",
+			"function": "int main(){#pragma omp target map(tofrom:var) device(0)#pragma omp teams distribute parallel forfor(int i = 0;i < 100;i++) {#pragma omp critical(addlock)var++;#pragma omp critical(sublock)var -= 2;}printf(\"%d\n\",var);return 0;}",
+			"pragma": "omp teams distribute parallel for\nfor(int i = 0;i < 100;i++) {#pragma omp critical(addlock)var++;#pragma omp critical(sublock)var -= 2;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical(addlock)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical(sublock)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB149-missingdata1-orig-gpu-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(to:a[0:100],b[0:100*100]) map(tofrom:c[0:100]) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute parallel for",
+			"abs_start_line": "39",
+			"start_line": "40",
+			"end_line": "43",
+			"kernel": "{for(int j = 0;j < 100;j++) {c[i] += b[j + i * 100] * a[j];}}",
+			"function": "int main(){a =(malloc(100 * sizeof(int )));b =(malloc((100 * 100) * sizeof(int )));c =(malloc(100 * sizeof(int )));for(int i = 0;i < 100;i++) {for(int j = 0;j < 100;j++) {b[j + i * 100] = 1;}a[i] = 1;c[i] = 0;}#pragma omp target map(to:a[0:100],b[0:100*100]) map(tofrom:c[0:100]) device(0){#pragma omp teams distribute parallel forfor(int i = 0;i < 100;i++) {for(int j = 0;j < 100;j++) {c[i] += b[j + i * 100] * a[j];}}}for(int i = 0;i < 100;i++) {if(c[i] != 100) {printf(\"Data Race\n\");return 1;}}free(a);free(b);free(c);return 0;}",
+			"pragma": "omp teams distribute parallel for\nfor(int i = 0;i < 100;i++) {for(int j = 0;j < 100;j++) {c[i] += b[j + i * 100] * a[j];}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB150-missinglock1-orig-gpu-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute parallel for",
+			"abs_start_line": "28",
+			"start_line": "29",
+			"end_line": "32",
+			"kernel": "{omp_set_lock(&lck);var++;omp_unset_lock(&lck);}",
+			"function": "int main(){omp_lock_t lck;int var = 0;int i;omp_init_lock(&lck);#pragma omp target map(tofrom:var) device(0)#pragma omp teams distribute parallel forfor(int i = 0;i < 100;i++) {omp_set_lock(&lck);var++;omp_unset_lock(&lck);}omp_destroy_lock(&lck);printf(\"%d\n\",var);return 0;}",
+			"pragma": "omp teams distribute parallel for\nfor(int i = 0;i < 100;i++) {omp_set_lock(&lck);var++;omp_unset_lock(&lck);}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB151-missinglock3-orig-gpu-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute parallel for",
+			"abs_start_line": "25",
+			"start_line": "26",
+			"end_line": "27",
+			"kernel": "{var++;}",
+			"function": "int main(){int var = 0;int i;#pragma omp target map(tofrom:var) device(0)#pragma omp teams distribute parallel forfor(int i = 0;i < 100;i++) {var++;}printf(\"%d\n\",var);return 0;}",
+			"pragma": "omp teams distribute parallel for\nfor(int i = 0;i < 100;i++) {var++;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB152-missinglock2-orig-gpu-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams num_teams(1)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp distribute parallel for",
+			"abs_start_line": "26",
+			"start_line": "27",
+			"end_line": "30",
+			"kernel": "{omp_set_lock(&lck);var++;omp_unset_lock(&lck);}",
+			"function": "int main(){omp_lock_t lck;int var = 0;omp_init_lock(&lck);#pragma omp target map(tofrom:var) device(0)#pragma omp teams num_teams(1)#pragma omp distribute parallel forfor(int i = 0;i < 100;i++) {omp_set_lock(&lck);var++;omp_unset_lock(&lck);}omp_destroy_lock(&lck);printf(\"%d\n\",var);return 0;}",
+			"pragma": "omp distribute parallel for\nfor(int i = 0;i < 100;i++) {omp_set_lock(&lck);var++;omp_unset_lock(&lck);}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB153-missinglock2-orig-gpu-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams num_teams(1)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp distribute parallel for",
+			"abs_start_line": "27",
+			"start_line": "28",
+			"end_line": "29",
+			"kernel": "{var++;}",
+			"function": "int main(){int var = 0;#pragma omp target map(tofrom:var) device(0)#pragma omp teams num_teams(1)#pragma omp distribute parallel forfor(int i = 0;i < 100;i++) {var++;}printf(\"%d\n \",var);return 0;}",
+			"pragma": "omp distribute parallel for\nfor(int i = 0;i < 100;i++) {var++;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB154-missinglock3-orig-gpu-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute reduction(+:var)",
+			"abs_start_line": "25",
+			"start_line": "26",
+			"end_line": "29",
+			"kernel": "{omp_set_lock(&lck);var++;omp_unset_lock(&lck);}",
+			"function": "int main(){omp_lock_t lck;int var = 0;omp_init_lock(&lck);#pragma omp target map(tofrom:var) device(0)#pragma omp teams distribute reduction(+:var)for(int i = 0;i < 100;i++) {omp_set_lock(&lck);var++;omp_unset_lock(&lck);}omp_destroy_lock(&lck);printf(\"%d\n \",var);return 0;}",
+			"pragma": "omp teams distribute reduction(+:var)\nfor(int i = 0;i < 100;i++) {omp_set_lock(&lck);var++;omp_unset_lock(&lck);}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB155-missingordered-orig-gpu-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var[0:100]) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel for ordered",
+			"abs_start_line": "30",
+			"start_line": "31",
+			"end_line": "35",
+			"kernel": "{#pragma omp ordered{var[i] = var[i - 1] + 1;}}",
+			"function": "int main(){int var[100];for(int i = 0;i < 100;i++) {var[i] = 0;}#pragma omp target map(tofrom:var[0:100]) device(0)#pragma omp parallel for orderedfor(int i = 1;i < 100;i++) {#pragma omp ordered{var[i] = var[i - 1] + 1;}}for(int i = 0;i < 100;i++) {if(var[i] != i) {printf(\"Data Race Present\");return 0;}}return 0;}",
+			"pragma": "omp parallel for ordered\nfor(int i = 1;i < 100;i++) {#pragma omp ordered{var[i] = var[i - 1] + 1;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp ordered",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB156-missingordered-orig-gpu-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var[0:100]) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute parallel for",
+			"abs_start_line": "27",
+			"start_line": "28",
+			"end_line": "29",
+			"kernel": "{var[i] = var[i - 1] + 1;}",
+			"function": "int main(){int var[100];for(int i = 0;i < 100;i++) {var[i] = 0;}#pragma omp target map(tofrom:var[0:100]) device(0)#pragma omp teams distribute parallel forfor(int i = 1;i < 100;i++) {var[i] = var[i - 1] + 1;}for(int i = 0;i < 100;i++) {if(var[i] != i) {printf(\"Data Race Present\n\");return 0;}}return 0;}",
+			"pragma": "omp teams distribute parallel for\nfor(int i = 1;i < 100;i++) {var[i] = var[i - 1] + 1;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB157-missingorderedsimd-orig-gpu-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var[0:100]) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute parallel for simd safelen(16)",
+			"abs_start_line": "32",
+			"start_line": "33",
+			"end_line": "34",
+			"kernel": "{var[i] = var[i - 16] + 1;}",
+			"function": "int main(){int var[100];for(int i = 0;i < 100;i++) {var[i] = 0;}#pragma omp target map(tofrom:var[0:100]) device(0)#pragma omp teams distribute parallel for simd safelen(16)for(int i = 16;i < 100;i++) {var[i] = var[i - 16] + 1;}printf(\"%d\n\",var[97]);return 0;}",
+			"pragma": "omp teams distribute parallel for simd safelen(16)\nfor(int i = 16;i < 100;i++) {var[i] = var[i - 16] + 1;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB158-missingtaskbarrier-orig-gpu-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(to:y[0:64],a) map(tofrom:x[0:64]) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(inout:x[i])",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(inout:x[i])",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB159-nobarrier-orig-gpu-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:b[0:8]) map(to:c[0:8],temp[0:8],a) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for",
+			"abs_start_line": "40",
+			"start_line": "41",
+			"end_line": "42",
+			"kernel": "{temp[i] = b[i] + c[i];}",
+			"function": "int main(){for(int i = 0;i < 8;i++) {b[i] = 0;c[i] = 2;temp[i] = 0;}a = 2;#pragma omp target map(tofrom:b[0:8]) map(to:c[0:8],temp[0:8],a) device(0)#pragma omp parallel{for(int i = 0;i < 100;i++) {#pragma omp forfor(int i = 0;i < 8;i++) {temp[i] = b[i] + c[i];}#pragma omp forfor(int i = 8 - 1;i >= 0;i--) {b[i] = temp[i] * a;}}}int val = 0;for(int i = 0;i < 100;i++) {val = val + 2;val = val * 2;}for(int i = 0;i < 8;i++) {if(b[i] != val) {printf(\"expected %d real %d \n\",val,b[i]);return 0;}}return 0;}",
+			"pragma": "omp for\nfor(int i = 0;i < 8;i++) {temp[i] = b[i] + c[i];}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for",
+			"abs_start_line": "45",
+			"start_line": "46",
+			"end_line": "47",
+			"kernel": "{b[i] = temp[i] * a;}",
+			"function": "int main(){for(int i = 0;i < 8;i++) {b[i] = 0;c[i] = 2;temp[i] = 0;}a = 2;#pragma omp target map(tofrom:b[0:8]) map(to:c[0:8],temp[0:8],a) device(0)#pragma omp parallel{for(int i = 0;i < 100;i++) {#pragma omp forfor(int i = 0;i < 8;i++) {temp[i] = b[i] + c[i];}#pragma omp forfor(int i = 8 - 1;i >= 0;i--) {b[i] = temp[i] * a;}}}int val = 0;for(int i = 0;i < 100;i++) {val = val + 2;val = val * 2;}for(int i = 0;i < 8;i++) {if(b[i] != val) {printf(\"expected %d real %d \n\",val,b[i]);return 0;}}return 0;}",
+			"pragma": "omp for\nfor(int i = 8 - 1;i >= 0;i--) {b[i] = temp[i] * a;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB160-nobarrier-orig-gpu-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:b[0:16]) map(to:c[0:16],temp[0:16],a) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams",
+			"abs_start_line": "39",
+			"start_line": "40",
+			"end_line": "49",
+			"kernel": "{#pragma omp distributefor(int i = 0;i < 16;i++) {temp[i] = b[i] + c[i];}#pragma omp distributefor(int i = 16 - 1;i >= 0;i--) {b[i] = temp[i] * a;}}",
+			"function": "int main(){for(int i = 0;i < 16;i++) {b[i] = 0;c[i] = 2;temp[i] = 0;}a = 2;#pragma omp target map(tofrom:b[0:16]) map(to:c[0:16],temp[0:16],a) device(0){#pragma omp teamsfor(int i = 0;i < 100;i++) {#pragma omp distributefor(int i = 0;i < 16;i++) {temp[i] = b[i] + c[i];}#pragma omp distributefor(int i = 16 - 1;i >= 0;i--) {b[i] = temp[i] * a;}}}int val = 0;for(int i = 0;i < 100;i++) {val = val + 2;val = val * 2;}for(int i = 0;i < 16;i++) {if(b[i] != val) {printf(\"index: %d val: %d\n\",i,b[i]);}}return 0;}",
+			"pragma": "omp teams\nfor(int i = 0;i < 100;i++) {#pragma omp distributefor(int i = 0;i < 16;i++) {temp[i] = b[i] + c[i];}#pragma omp distributefor(int i = 16 - 1;i >= 0;i--) {b[i] = temp[i] * a;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp distribute",
+			"abs_start_line": "41",
+			"start_line": "42",
+			"end_line": "43",
+			"kernel": "{temp[i] = b[i] + c[i];}",
+			"function": "int main(){for(int i = 0;i < 16;i++) {b[i] = 0;c[i] = 2;temp[i] = 0;}a = 2;#pragma omp target map(tofrom:b[0:16]) map(to:c[0:16],temp[0:16],a) device(0){#pragma omp teamsfor(int i = 0;i < 100;i++) {#pragma omp distributefor(int i = 0;i < 16;i++) {temp[i] = b[i] + c[i];}#pragma omp distributefor(int i = 16 - 1;i >= 0;i--) {b[i] = temp[i] * a;}}}int val = 0;for(int i = 0;i < 100;i++) {val = val + 2;val = val * 2;}for(int i = 0;i < 16;i++) {if(b[i] != val) {printf(\"index: %d val: %d\n\",i,b[i]);}}return 0;}",
+			"pragma": "omp distribute\nfor(int i = 0;i < 16;i++) {temp[i] = b[i] + c[i];}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp distribute",
+			"abs_start_line": "46",
+			"start_line": "47",
+			"end_line": "48",
+			"kernel": "{b[i] = temp[i] * a;}",
+			"function": "int main(){for(int i = 0;i < 16;i++) {b[i] = 0;c[i] = 2;temp[i] = 0;}a = 2;#pragma omp target map(tofrom:b[0:16]) map(to:c[0:16],temp[0:16],a) device(0){#pragma omp teamsfor(int i = 0;i < 100;i++) {#pragma omp distributefor(int i = 0;i < 16;i++) {temp[i] = b[i] + c[i];}#pragma omp distributefor(int i = 16 - 1;i >= 0;i--) {b[i] = temp[i] * a;}}}int val = 0;for(int i = 0;i < 100;i++) {val = val + 2;val = val * 2;}for(int i = 0;i < 16;i++) {if(b[i] != val) {printf(\"index: %d val: %d\n\",i,b[i]);}}return 0;}",
+			"pragma": "omp distribute\nfor(int i = 16 - 1;i >= 0;i--) {b[i] = temp[i] * a;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB161-nolocksimd-orig-gpu-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams num_teams(1) thread_limit(1048)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp distribute parallel for",
+			"abs_start_line": "30",
+			"start_line": "31",
+			"end_line": "35",
+			"kernel": "{#pragma omp simdfor(int i = 0;i < 8;i++) {var[i]++;}}",
+			"function": "int main(){int var[8];for(int i = 0;i < 8;i++) {var[i] = 0;}#pragma omp target map(tofrom:var) device(0)#pragma omp teams num_teams(1) thread_limit(1048)#pragma omp distribute parallel forfor(int i = 0;i < 20;i++) {#pragma omp simdfor(int i = 0;i < 8;i++) {var[i]++;}}for(int i = 0;i < 8;i++) {if(var[i] != 20) printf(\"%d\n \",var[i]);}return 0;}",
+			"pragma": "omp distribute parallel for\nfor(int i = 0;i < 20;i++) {#pragma omp simdfor(int i = 0;i < 8;i++) {var[i]++;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp simd",
+			"abs_start_line": "32",
+			"start_line": "33",
+			"end_line": "34",
+			"kernel": "{var[i]++;}",
+			"function": "int main(){int var[8];for(int i = 0;i < 8;i++) {var[i] = 0;}#pragma omp target map(tofrom:var) device(0)#pragma omp teams num_teams(1) thread_limit(1048)#pragma omp distribute parallel forfor(int i = 0;i < 20;i++) {#pragma omp simdfor(int i = 0;i < 8;i++) {var[i]++;}}for(int i = 0;i < 8;i++) {if(var[i] != 20) printf(\"%d\n \",var[i]);}return 0;}",
+			"pragma": "omp simd\nfor(int i = 0;i < 8;i++) {var[i]++;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB162-nolocksimd-orig-gpu-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams num_teams(1) thread_limit(1048)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp distribute parallel for reduction(+:var)",
+			"abs_start_line": "28",
+			"start_line": "29",
+			"end_line": "33",
+			"kernel": "{#pragma omp simdfor(int i = 0;i < 8;i++) {var[i]++;}}",
+			"function": "int main(){int var[8];for(int i = 0;i < 8;i++) {var[i] = 0;}#pragma omp target map(tofrom:var) device(0)#pragma omp teams num_teams(1) thread_limit(1048)#pragma omp distribute parallel for reduction(+:var)for(int i = 0;i < 20;i++) {#pragma omp simdfor(int i = 0;i < 8;i++) {var[i]++;}}for(int i = 0;i < 8;i++) {if(var[i] != 20) printf(\"%d\n \",var[i]);}return 0;}",
+			"pragma": "omp distribute parallel for reduction(+:var)\nfor(int i = 0;i < 20;i++) {#pragma omp simdfor(int i = 0;i < 8;i++) {var[i]++;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp simd",
+			"abs_start_line": "30",
+			"start_line": "31",
+			"end_line": "32",
+			"kernel": "{var[i]++;}",
+			"function": "int main(){int var[8];for(int i = 0;i < 8;i++) {var[i] = 0;}#pragma omp target map(tofrom:var) device(0)#pragma omp teams num_teams(1) thread_limit(1048)#pragma omp distribute parallel for reduction(+:var)for(int i = 0;i < 20;i++) {#pragma omp simdfor(int i = 0;i < 8;i++) {var[i]++;}}for(int i = 0;i < 8;i++) {if(var[i] != 20) printf(\"%d\n \",var[i]);}return 0;}",
+			"pragma": "omp simd\nfor(int i = 0;i < 8;i++) {var[i]++;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB163-simdmissinglock1-orig-gpu-no.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var[0:64]) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute parallel for reduction(+:var)",
+			"abs_start_line": "28",
+			"start_line": "29",
+			"end_line": "33",
+			"kernel": "{#pragma omp simdfor(int i = 0;i < 64;i++) {var[i]++;}}",
+			"function": "int main(){int var[64];for(int i = 0;i < 64;i++) {var[i] = 0;}#pragma omp target map(tofrom:var[0:64]) device(0)#pragma omp teams distribute parallel for reduction(+:var)for(int i = 0;i < 100;i++) {#pragma omp simdfor(int i = 0;i < 64;i++) {var[i]++;}}for(int i = 0;i < 64;i++) {if(var[i] != 100) {printf(\"%d\n\",var[i]);}}return 0;}",
+			"pragma": "omp teams distribute parallel for reduction(+:var)\nfor(int i = 0;i < 100;i++) {#pragma omp simdfor(int i = 0;i < 64;i++) {var[i]++;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp simd",
+			"abs_start_line": "30",
+			"start_line": "31",
+			"end_line": "32",
+			"kernel": "{var[i]++;}",
+			"function": "int main(){int var[64];for(int i = 0;i < 64;i++) {var[i] = 0;}#pragma omp target map(tofrom:var[0:64]) device(0)#pragma omp teams distribute parallel for reduction(+:var)for(int i = 0;i < 100;i++) {#pragma omp simdfor(int i = 0;i < 64;i++) {var[i]++;}}for(int i = 0;i < 64;i++) {if(var[i] != 100) {printf(\"%d\n\",var[i]);}}return 0;}",
+			"pragma": "omp simd\nfor(int i = 0;i < 64;i++) {var[i]++;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB164-simdmissinglock1-orig-gpu-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp target map(tofrom:var[0:64]) device(0)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp teams distribute parallel for",
+			"abs_start_line": "32",
+			"start_line": "33",
+			"end_line": "37",
+			"kernel": "{#pragma omp simdfor(int i = 0;i < 64;i++) {var[i]++;}}",
+			"function": "int main(){int var[64];for(int i = 0;i < 64;i++) {var[i] = 0;}#pragma omp target map(tofrom:var[0:64]) device(0)#pragma omp teams distribute parallel forfor(int i = 0;i < 100;i++) {#pragma omp simdfor(int i = 0;i < 64;i++) {var[i]++;}}printf(\"%d\n\",var[63]);return 0;}",
+			"pragma": "omp teams distribute parallel for\nfor(int i = 0;i < 100;i++) {#pragma omp simdfor(int i = 0;i < 64;i++) {var[i]++;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp simd",
+			"abs_start_line": "34",
+			"start_line": "35",
+			"end_line": "36",
+			"kernel": "{var[i]++;}",
+			"function": "int main(){int var[64];for(int i = 0;i < 64;i++) {var[i] = 0;}#pragma omp target map(tofrom:var[0:64]) device(0)#pragma omp teams distribute parallel forfor(int i = 0;i < 100;i++) {#pragma omp simdfor(int i = 0;i < 64;i++) {var[i]++;}}printf(\"%d\n\",var[63]);return 0;}",
+			"pragma": "omp simd\nfor(int i = 0;i < 64;i++) {var[i]++;}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB165-taskdep4-orig-omp50-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp task depend(inout: x) shared(x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(y)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait depend(in: x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB166-taskdep4-orig-omp50-no.c",
+	"data": [
+		{
+			"pragma_string": "omp task depend(inout: x) shared(x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(y)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait depend(in: x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB167-taskdep4-orig-omp50-no.c",
+	"data": [
+		{
+			"pragma_string": "omp task depend(inout: x) shared(x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: x) depend(inout: y) shared(x, y)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait depend(in: x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB168-taskdep5-orig-omp50-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp task depend(inout: x) shared(x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(in: x) depend(inout: y) shared(x, y)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait depend(in: x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB169-missingsyncwrite-orig-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for default(shared) private(j,k)",
+			"abs_start_line": "35",
+			"start_line": "36",
+			"end_line": "41",
+			"kernel": "{for(j = 1;j < 8 - 1;j++) {for(k = 0;k < 8;k++) {r1[k] = r[i][j - 1][k] + r[i][j + 1][k] + r[i - 1][j][k] + r[i + 1][j][k];}}}",
+			"function": "int main(){int i;int j;int k;double r1[8];double r[8][8][8];for(i = 0;i < 8;i++) {for(j = 0;j < 8;j++) {for(k = 0;k < 8;k++) {r[i][j][k] = i;}}}#pragma omp parallel for default(shared) private(j,k)for(i = 1;i < 8 - 1;i++) {for(j = 1;j < 8 - 1;j++) {for(k = 0;k < 8;k++) {r1[k] = r[i][j - 1][k] + r[i][j + 1][k] + r[i - 1][j][k] + r[i + 1][j][k];}}}for(k = 0;k < 8;k++) printf(\"%f \",r1[k]);printf(\"\n\");return 0;}",
+			"pragma": "omp parallel for default(shared) private(j,k)\nfor(i = 1;i < 8 - 1;i++) {for(j = 1;j < 8 - 1;j++) {for(k = 0;k < 8;k++) {r1[k] = r[i][j - 1][k] + r[i][j + 1][k] + r[i - 1][j][k] + r[i + 1][j][k];}}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB170-nestedloops-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for private(j,k,tmp1)",
+			"abs_start_line": "27",
+			"start_line": "28",
+			"end_line": "34",
+			"kernel": "{for(j = 0;j < 12;j++) {for(k = 0;k < 12;k++) {tmp1 = 6.0 / m;a[i][j][k] = tmp1 + 4;}}}",
+			"function": "int main(){int i;int j;int k;int m;double tmp1;double a[12][12][12];m = 3.0;#pragma omp parallel for private(j,k,tmp1)for(i = 0;i < 12;i++) {for(j = 0;j < 12;j++) {for(k = 0;k < 12;k++) {tmp1 = 6.0 / m;a[i][j][k] = tmp1 + 4;}}}return 0;}",
+			"pragma": "omp parallel for private(j,k,tmp1)\nfor(i = 0;i < 12;i++) {for(j = 0;j < 12;j++) {for(k = 0;k < 12;k++) {tmp1 = 6.0 / m;a[i][j][k] = tmp1 + 4;}}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB171-threadprivate3-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp threadprivate(x)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel for default(shared)",
+			"abs_start_line": "25",
+			"start_line": "26",
+			"end_line": "33",
+			"kernel": "{x[i] = - 1.0;if(omp_get_thread_num() == 0) {j = x[0];}if(omp_get_thread_num() == 0) {k = i + 0.05;}}",
+			"function": "int main(){int i;double j;double k;#pragma omp parallel for default(shared)for(i = 0;i < 20;i++) {x[i] = - 1.0;if(omp_get_thread_num() == 0) {j = x[0];}if(omp_get_thread_num() == 0) {k = i + 0.05;}}printf(\"%f %f\n\",j,k);return 0;}",
+			"pragma": "omp parallel for default(shared)\nfor(i = 0;i < 20;i++) {x[i] = - 1.0;if(omp_get_thread_num() == 0) {j = x[0];}if(omp_get_thread_num() == 0) {k = i + 0.05;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB172-critical2-orig-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel default(shared)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp for private(i)",
+			"abs_start_line": "28",
+			"start_line": "29",
+			"end_line": "29",
+			"kernel": "q[i] += qq[i];",
+			"function": "int main(){int i;double q[10];double qq[10];for(i = 0;i < 10;i++) qq[i] =((double )i);for(i = 0;i < 10;i++) q[i] =((double )i);#pragma omp parallel default(shared){#pragma omp for private(i)for(i = 0;i < 10;i++) q[i] += qq[i];#pragma omp critical{q[9] += 1.0;}#pragma omp barrier#pragma omp single{q[9] = q[9] - 1.0;}}for(i = 0;i < 10;i++) printf(\"%f %f\n\",qq[i],q[i]);return 0;}",
+			"pragma": "omp for private(i)\nfor(i = 0;i < 10;i++) q[i] += qq[i];\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp critical",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp barrier",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB173-non-sibling-taskdep-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(inout : a) shared(a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(inout : a) shared(a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(inout : a) shared(a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(inout : a) shared(a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB174-non-sibling-taskdep-no.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp single",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(inout : a) shared(a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(inout : a) shared(a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(inout : a) shared(a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(inout : a) shared(a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB175-non-sibling-taskdep2-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task depend(inout : a) shared(a)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB176-fib-taskdep-no.c",
+	"data": [
+		{
+			"pragma_string": "omp task shared(i) depend(out : i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(j) depend(out : j)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(i, j) depend(in : i, j)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel sections",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB177-fib-taskdep-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp task shared(i) depend(out : i)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(j) depend(out : j)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp task shared(i, j) depend(in : j)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp taskwait",
+			"end": "true"
+		},
+		{
+			"pragma_string": "omp parallel sections",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB178-input-dependence-var-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for shared(A)",
+			"abs_start_line": "41",
+			"start_line": "42",
+			"end_line": "47",
+			"kernel": "{A[i] = i;if(N > 10000) {A[0] = 1;}}",
+			"function": "int main(int argc,char *argv[]){int *A;int N = 100;if(argc > 1) N = atoi(argv[1]);A =((int *)(malloc(sizeof(int ) * N)));load_from_input(A,N);#pragma omp parallel for shared(A)for(int i = 0;i < N;i++) {A[i] = i;if(N > 10000) {A[0] = 1;}}free(A);return 0;}",
+			"pragma": "omp parallel for shared(A)\nfor(int i = 0;i < N;i++) {A[i] = i;if(N > 10000) {A[0] = 1;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB179-thread-sensitivity-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel for shared(A)",
+			"abs_start_line": "30",
+			"start_line": "31",
+			"end_line": "36",
+			"kernel": "{A[i] = i;if(i == 1) {A[0] = 1;}}",
+			"function": "int main(int argc,char *argv[]){int *A;int N = 100;A =((int *)(malloc(sizeof(int ) * N)));#pragma omp parallel for shared(A)for(int i = 0;i < N;i++) {A[i] = i;if(i == 1) {A[0] = 1;}}free(A);return 0;}",
+			"pragma": "omp parallel for shared(A)\nfor(int i = 0;i < N;i++) {A[i] = i;if(i == 1) {A[0] = 1;}}\n",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{
+	"file": "/home/patrick/llnl/omp_search/micro-benchmarks/DRB180-miniAMR-yes.c",
+	"data": [
+		{
+			"pragma_string": "omp parallel default(shared) private(i, j, k, bp)",
+			"end": "true"
+		},
+		{
+			"pragma_string": "NULL",
+			"end": "true"
+		}
+	]
+}
+,
+{ "file": "empty", "data": [] }
+	]
+}
+
