@@ -29,9 +29,12 @@ def create_data(datapath, outputpath):
             # print(data["func"])
             data["comment"] = extract_comments(code)
             data["idx"] = id
-            idx = np.argwhere(labels == id)[0][0]
-            print(labels[idx][0], labels[idx][1])
-            data["label"] = labels[idx][1]
+            try:
+                idx = np.argwhere(labels == id)[0][0]
+                print(labels[idx][0], labels[idx][1])
+                data["label"] = labels[idx][1]
+            except: 
+                pass 
             ids.append(id)
         dataset.append(data) 
 
@@ -127,10 +130,10 @@ def main():
 
 
     # create train.txt 
-    create_train(outputpath)
+    # create_train(outputpath)
 
     # create valid.txt 
-    create_valid(outputpath) 
+    # create_valid(outputpath) 
 
     # create test.txt 
     create_test(outputpath)
