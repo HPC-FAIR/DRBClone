@@ -1,5 +1,12 @@
 # DRBClone
 
+## Introduction 
+
+This is the demonstration of using CodeBERT as encoder to have a downstream task of clone detection from [BigCloneBench](https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/Clone-detection-BigCloneBench). 
+
+We are applying Transfer Learning by using our DataRaceBench(DRB) dataset to test the model to run similarity analysis. 
+
+
 
 ## Setup 
 
