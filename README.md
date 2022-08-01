@@ -17,6 +17,7 @@
 
 
 **In order to run the program you have to get the best model from BigCloneBench**
+
 **You have to copy the saved_models from Your finished fine-tuning data from BigCloneBench**
 
 ## Files
@@ -27,7 +28,7 @@
 
 - train.sh: 
 
-  commands that runs the training process
+  commands that runs the training process (no training dataset yet)
 
 - run.py: 
 
@@ -55,5 +56,11 @@
 
 ## Steps
 
+  1. Once you finished the setup and training the bigclonebench, you will copy the saved_model from the bigclonebench to the current directory. 
+  2. To prepare the data, you need to run `python3 preprocessing.py` 
+  3. You will now run `./test.sh` to get the prediction
+  4. You will then see the similarity score in the `saved_model/prediction.txt`
+  5. With the prediction we can run clustering analysis by running `python3 clustering.py`
+ 
 
 
