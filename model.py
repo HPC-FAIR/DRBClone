@@ -15,7 +15,7 @@ class RobertaClassificationHead(nn.Module):
         super().__init__()
         self.dense = nn.Linear(config.hidden_size*2, config.hidden_size)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
-        self.out_proj = nn.Linear(config.hidden_size, 2)
+        self.out_proj = nn.Linear(config.hidden_size, 1)
 
     def forward(self, features, **kwargs):
         x = features[:, 0, :]  # take <s> token (equiv. to [CLS])
@@ -40,11 +40,11 @@ class Model(nn.Module):
     def forward(self, input_ids=None,labels=None): 
         input_ids=input_ids.view(-1,self.args.block_size)
         outputs = self.encoder(input_ids= input_ids,attention_mask=input_ids.ne(1))[0]
-        print(outputs)
-        print(outputs.shape) 
+        # print(outputs)
+        # print(outputs.shape) 
         
         logits=self.classifier(outputs)
-        prob=F.softmax(logits)
+        # prob=F.softmax(logits)
         if labels is not None:
             loss_fct = CrossEntropyLoss()
             loss = loss_fct(logits, labels)
