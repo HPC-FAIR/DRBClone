@@ -21,6 +21,13 @@
 
 ## Files
 
+- test.sh: 
+  
+  commands that runs the testing process
+
+- train.sh: 
+
+  commands that runs the training process
 
 - run.py: 
 
