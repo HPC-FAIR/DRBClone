@@ -17,4 +17,4 @@ python run.py \
     --learning_rate 5e-5 \
     --max_grad_norm 1.0 \
     --evaluate_during_training \
-    --seed 123456 2>&1| tee train.log
+    --seed 123456 2>&1| tee log/train.log

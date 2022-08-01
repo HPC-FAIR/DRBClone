@@ -10,25 +10,28 @@ from sklearn.cluster import AgglomerativeClustering
 import scipy.cluster.hierarchy as shc 
 
 
-def plot_matrix(m): 
+def plot_matrix(m, func='original'): 
     
+    mat = invert_similar(m, func)
+
+    plt.matshow(mat)
+    plt.savefig('graph/heatmap_{}.png'.format(func))
+
+
+def dendrogram(m, func='original'): 
     
+    mat = invert_similar(m, func) 
 
-    plt.matshow(m)
-    plt.savefig('temp.png')
-
-
-def dendrogram(mat): 
-    
     plt.figure(figsize=(25, 50)) 
     plt.title("Dendrograms") 
     dend = shc.dendrogram(shc.linkage(mat, method='complete')) 
-    plt.savefig('dendrogram.png')
+    plt.savefig('graph/dendrogram_{}.png'.format(func))
 
     
 
-def clustering(mat): 
+def clustering(mat, func='original'): 
     
+    mat = invert_similar(mat, func) 
 
     model = AgglomerativeClustering(affinity='precomputed', n_clusters=2, linkage='complete')
     model.fit(mat)
@@ -37,18 +40,21 @@ def clustering(mat):
     print(model.labels_)
 
 
-def invert_similar(m): 
+def invert_similar(m, func): 
     # 1 - s 
     # sqrt( 1 - s) 
     # - log(s) 
     # (1/s) -1 
-    
-    
-    return np.array(list(map(lambda s : -np.log(s), m)))
-
+    if func == 'log': 
+        return np.array(list(map(lambda s : -np.log(s), m)))
+    elif func == 'sqrt': 
+        return np.array(list(map(lambda s : sqrt(1-s), m)))
+    else: 
+        return m 
 
 def main(): 
     
+    # reading prediction.txt  
     with open("./saved_models/predictions.txt", 'r') as f: 
 
         lines = f.readlines() 
@@ -59,29 +65,23 @@ def main():
             score = score.strip('\n')
            
             data.append(np.array((func1, func2, float(score)), dtype=dtype))
-       
+        
         data = np.array(data)
         # print(data.shape)
         data.sort(order=['func1', 'func2', 'score'])
         data.resize(181, 181)
         label = data['func2'][0]
-        # print(label) 
-        # print(label.shape)
+        
+        
         mat = data['score']
-        print(mat)
-        print(mat.max()) 
-        print(mat.min())
-        # print(mat.shape)
 
+        plot_matrix(mat) 
+        plot_matrix(mat, 'log') 
+
+        dendrogram(mat) 
+        dendrogram(mat, 'log') 
         
-        dist = invert_similar(mat)
-        print(dist)
-        print(dist.max())
-        print(dist.min())
-        plot_matrix(dist) 
-        
-        dendrogram(mat)
-        clustering(dist) 
+        clustering(mat, 'log') 
 
 
 

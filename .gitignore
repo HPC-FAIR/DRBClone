@@ -1,2 +1,4 @@
 __pycache__ 
 saved_models/checkpoint-best-f1
+log
+temp
