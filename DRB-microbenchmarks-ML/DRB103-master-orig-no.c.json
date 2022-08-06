@@ -1,0 +1,25 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB103-master-orig-no.c",
+"function":"",
+"loop id":"0",
+"loop line":"52",
+"loop column":"3",
+"pragma type":"",
+"Addcount":"0",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"0",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"1",
+"Combcount":"0",
+"Constcount":"0",
+"DediDeclRefcount":"3",
+"TotalDeclRefcount":"4",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false"
+}
+}

@@ -1,0 +1,4 @@
+#pragma omp parallel for
+    for (c2 = 0; c2 <= 499; c2++) {
+        X[500 - 1][c2] = X[500 - 1][c2] / B[500 - 1][c2];
+    }

@@ -1,0 +1,27 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB169-missingsyncwrite-orig-yes.c",
+"function":"main",
+"loop id":"4",
+"loop line":"35",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"5",
+"Subcount":"4",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"3",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"4",
+"Combcount":"0",
+"Constcount":"12",
+"DediDeclRefcount":"5",
+"TotalDeclRefcount":"27",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i",
+"private":["j","k"]
+}
+}

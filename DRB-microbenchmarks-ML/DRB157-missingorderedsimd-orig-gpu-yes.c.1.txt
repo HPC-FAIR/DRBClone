@@ -1,0 +1,4 @@
+#pragma omp teams distribute parallel for simd safelen(16)
+    for (int i = 16; i < 100; i++) {
+        var[i] = var[i - 16] + 1;
+    }

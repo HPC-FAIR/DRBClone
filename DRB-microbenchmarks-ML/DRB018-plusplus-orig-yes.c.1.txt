@@ -1,0 +1,4 @@
+#pragma omp parallel for
+    for (i = 0; i < inLen; ++i) {
+        output[outLen++] = input[i];
+    }

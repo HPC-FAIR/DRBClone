@@ -1,0 +1,5 @@
+#pragma omp parallel for linear(j)
+    for (i = 0; i < len; i++) {
+        c[j] += a[i] * b[i];
+        j++;
+    }

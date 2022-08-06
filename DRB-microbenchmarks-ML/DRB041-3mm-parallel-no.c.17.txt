@@ -1,0 +1,6 @@
+#pragma omp parallel for private(c2)
+    for (c1 = (((nj > nk ? nj : nk)) > nm ? ((nj > nk ? nj : nk)) : nm); c1 <= ni + -1; c1++) {
+        for (c2 = 0; c2 <= nk + -1; c2++) {
+            A[c1][c2] = ((double)c1) * c2 / ni;
+        }
+    }

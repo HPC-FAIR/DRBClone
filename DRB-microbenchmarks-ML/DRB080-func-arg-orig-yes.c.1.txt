@@ -1,0 +1,4 @@
+#pragma omp parallel
+    {
+        f1(&i);
+    }

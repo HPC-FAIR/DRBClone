@@ -1,0 +1,7 @@
+#pragma omp parallel for ordered
+    for (int i = 1; i < 100; i++) {
+        #pragma omp ordered
+            {
+                var[i] = var[i - 1] + 1;
+            }
+    }

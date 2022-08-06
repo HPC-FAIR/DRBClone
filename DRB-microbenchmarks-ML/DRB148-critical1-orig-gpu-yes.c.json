@@ -1,0 +1,27 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB148-critical1-orig-gpu-yes.c",
+"function":"main",
+"loop id":"1",
+"loop line":"29",
+"loop column":"3",
+"pragma type":"teams ditribute parallel for",
+"Addcount":"0",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"2",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"0",
+"Combcount":"2",
+"Constcount":"6",
+"DediDeclRefcount":"2",
+"TotalDeclRefcount":"8",
+"ordered":"false",
+"offload":"true",
+"multiversioned":"false",
+"induction variable":"i",
+"map tofrom":["var"]
+}
+}

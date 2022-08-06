@@ -1,0 +1,3 @@
+#pragma omp parallel for reduction(+: sum2)
+    for (i = 0; i < len; i++)
+        sum2 += a[i] * b[i];

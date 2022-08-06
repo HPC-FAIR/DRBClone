@@ -1,0 +1,7 @@
+#pragma omp parallel
+    {
+        #pragma omp single
+            {
+                result = fib(input);
+            }
+    }

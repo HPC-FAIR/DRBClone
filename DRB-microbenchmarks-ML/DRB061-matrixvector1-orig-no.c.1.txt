@@ -1,0 +1,8 @@
+#pragma omp parallel for private(i,j)
+    for (i = 0; i < 100; i++) {
+        float sum = 0.;
+        for (j = 0; j < 100; j++) {
+            sum += a[i][j] * v[j];
+        }
+        v_out[i] = sum;
+    }

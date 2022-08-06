@@ -1,0 +1,9 @@
+#pragma omp parallel for private(j,k,tmp1)
+    for (i = 0; i < 12; i++) {
+        for (j = 0; j < 12; j++) {
+            for (k = 0; k < 12; k++) {
+                tmp1 = 6. / m;
+                a[i][j][k] = tmp1 + 4;
+            }
+        }
+    }

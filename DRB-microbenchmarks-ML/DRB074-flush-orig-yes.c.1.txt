@@ -1,0 +1,5 @@
+#pragma omp parallel reduction(+: sum) num_threads(10)
+    {
+        f1(&i);
+        sum += i;
+    }

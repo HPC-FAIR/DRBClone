@@ -1,0 +1,11 @@
+#pragma omp parallel
+    {
+        #pragma omp for
+            for (i = 1; i <= 1000; i++) {
+                sum0 = sum0 + i;
+            }
+        #pragma omp critical
+            {
+                sum = sum + sum0;
+            }
+    }

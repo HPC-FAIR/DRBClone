@@ -1,0 +1,9 @@
+#pragma omp parallel
+    {
+        #pragma omp single
+            {
+                for (i = 0; i < 100; i++) {
+                    gen_task(i);
+                }
+            }
+    }

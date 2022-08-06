@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB073-doall2-orig-yes.c",
+"function":"main",
+"loop id":"1",
+"loop line":"60",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"1",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"2",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"3",
+"Combcount":"0",
+"Constcount":"5",
+"DediDeclRefcount":"3",
+"TotalDeclRefcount":"12",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i"
+}
+}

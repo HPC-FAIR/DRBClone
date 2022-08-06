@@ -1,0 +1,28 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB059-lastprivate-orig-no.c",
+"function":"foo",
+"loop id":"1",
+"loop line":"60",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"0",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"1",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"2",
+"Combcount":"0",
+"Constcount":"2",
+"DediDeclRefcount":"2",
+"TotalDeclRefcount":"5",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i",
+"private":["i"],
+"lastprivate":["x"]
+}
+}

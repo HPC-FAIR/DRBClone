@@ -1,0 +1,6 @@
+#pragma omp for schedule(dynamic, 1)
+    for (int i = 0; i < 4; ++i) {
+        a[i] = i;
+        int s;
+        s = (-3 - 3) / -3;
+    }

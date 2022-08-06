@@ -1,0 +1,4 @@
+#pragma omp ordered
+    {
+        var[i] = var[i - 1] + 1;
+    }

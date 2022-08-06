@@ -1,0 +1,4 @@
+#pragma omp parallel for
+    for (i = 0; i < len; ++i) {
+        fprintf(pfile, "%d\n", A[i]);
+    }

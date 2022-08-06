@@ -1,0 +1,4 @@
+#pragma omp teams distribute parallel for reduction(+: var)
+    for (int i = 0; i < 100; i++) {
+        var++;
+    }

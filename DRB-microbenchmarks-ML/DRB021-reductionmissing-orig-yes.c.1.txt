@@ -1,0 +1,6 @@
+#pragma omp parallel for private(temp,i,j)
+    for (i = 0; i < len; i++)
+        for (j = 0; j < len; j++) {
+            temp = u[i][j];
+            sum = sum + temp * temp;
+        }

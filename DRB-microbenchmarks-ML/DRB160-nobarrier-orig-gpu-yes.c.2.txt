@@ -1,0 +1,4 @@
+#pragma omp distribute
+    for (int i = 16 - 1; i >= 0; i--) {
+        b[i] = temp[i] * a;
+    }

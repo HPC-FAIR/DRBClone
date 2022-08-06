@@ -1,0 +1,4 @@
+#pragma omp for
+    for (int i = 0; i < 8; i++) {
+        temp[i] = b[i] + c[i];
+    }

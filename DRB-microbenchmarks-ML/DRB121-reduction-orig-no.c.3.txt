@@ -1,0 +1,10 @@
+#pragma omp parallel reduction(+: var)
+    {
+        #pragma omp for schedule(static) reduction(+: sum1)
+            for (i = 0; i < 5; i++)
+                sum1 += i;
+        #pragma omp for schedule(static) reduction(+: sum2)
+            for (i = 0; i < 5; i++)
+                sum2 += i;
+        var = sum1 + sum2;
+    }

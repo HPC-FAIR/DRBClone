@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB074-flush-orig-yes.c",
+"function":"main",
+"loop id":"0",
+"loop line":"69",
+"loop column":"3",
+"pragma type":"",
+"Addcount":"0",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"0",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"1",
+"Combcount":"1",
+"Constcount":"1",
+"DediDeclRefcount":"4",
+"TotalDeclRefcount":"5",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"reduction":["+:sum"]
+}
+}

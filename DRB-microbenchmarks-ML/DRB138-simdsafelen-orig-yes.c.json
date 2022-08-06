@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB138-simdsafelen-orig-yes.c",
+"function":"main",
+"loop id":"1",
+"loop line":"25",
+"loop column":"3",
+"pragma type":"simd",
+"Addcount":"0",
+"Subcount":"2",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"1",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"2",
+"Combcount":"0",
+"Constcount":"1",
+"DediDeclRefcount":"4",
+"TotalDeclRefcount":"10",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i"
+}
+}

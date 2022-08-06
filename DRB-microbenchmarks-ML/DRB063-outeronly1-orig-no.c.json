@@ -1,0 +1,27 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB063-outeronly1-orig-no.c",
+"function":"foo",
+"loop id":"1",
+"loop line":"58",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"1",
+"Subcount":"1",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"2",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"3",
+"Combcount":"0",
+"Constcount":"4",
+"DediDeclRefcount":"5",
+"TotalDeclRefcount":"14",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i",
+"private":["j"]
+}
+}

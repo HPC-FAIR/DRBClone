@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB068-restrictpointer2-orig-no.c",
+"function":"foo",
+"loop id":"1",
+"loop line":"62",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"1",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"1",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"2",
+"Combcount":"0",
+"Constcount":"1",
+"DediDeclRefcount":"5",
+"TotalDeclRefcount":"10",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i"
+}
+}

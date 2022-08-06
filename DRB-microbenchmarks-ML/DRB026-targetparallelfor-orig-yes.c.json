@@ -1,0 +1,27 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB026-targetparallelfor-orig-yes.c",
+"function":"main",
+"loop id":"2",
+"loop line":"63",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"4",
+"Subcount":"2",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"2",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"4",
+"Combcount":"0",
+"Constcount":"8",
+"DediDeclRefcount":"3",
+"TotalDeclRefcount":"16",
+"ordered":"false",
+"offload":"true",
+"multiversioned":"false",
+"induction variable":"i",
+"map tofrom":["a[0:len]"]
+}
+}

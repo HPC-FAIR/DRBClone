@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB007-indirectaccess3-orig-yes.c",
+"function":"main",
+"loop id":"2",
+"loop line":"125",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"0",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"1",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"1",
+"Combcount":"2",
+"Constcount":"4",
+"DediDeclRefcount":"5",
+"TotalDeclRefcount":"9",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i"
+}
+}

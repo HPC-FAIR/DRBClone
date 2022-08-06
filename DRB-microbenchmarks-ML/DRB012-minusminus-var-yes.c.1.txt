@@ -1,0 +1,6 @@
+#pragma omp parallel for
+    for (i = numNodes - 1; i > -1; --i) {
+        if (x[i] <= 0) {
+            numNodes2--;
+        }
+    }

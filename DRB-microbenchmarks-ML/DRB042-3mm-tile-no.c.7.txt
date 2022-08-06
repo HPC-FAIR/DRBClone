@@ -1,0 +1,5 @@
+#pragma omp simd
+    for (c4 = (nj > nl ? nj : nl); c4 <= ((((16 * c2 + 15 < nk + -1 ? 16 * c2 + 15 : nk + -1)) < nm + -1 ? ((16 * c2 + 15 < nk + -1 ? 16 * c2 + 15 : nk + -1)) : nm + -1)); c4++) {
+        A[c3][c4] = ((double)c3) * c4 / ni;
+        C[c3][c4] = ((double)c3) * (c4 + 3) / nl;
+    }

@@ -1,0 +1,2 @@
+#pragma omp atomic read acquire
+    tmp = y;

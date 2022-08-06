@@ -1,0 +1,3 @@
+#pragma omp simd safelen(2)
+    for (i = m; i < n; i++)
+        b[i] = b[i - m] - 1.F;

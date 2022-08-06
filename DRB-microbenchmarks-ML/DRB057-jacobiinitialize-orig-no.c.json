@@ -1,0 +1,27 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB057-jacobiinitialize-orig-no.c",
+"function":"initialize",
+"loop id":"1",
+"loop line":"69",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"2",
+"Subcount":"8",
+"Mulcount":"11",
+"Divcount":"0",
+"Cmpcount":"2",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"6",
+"Combcount":"0",
+"Constcount":"14",
+"DediDeclRefcount":"11",
+"TotalDeclRefcount":"29",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i",
+"private":["i","j","xx","yy"]
+}
+}

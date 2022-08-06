@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB016-outputdep-orig-yes.c",
+"function":"main",
+"loop id":"1",
+"loop line":"71",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"0",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"1",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"3",
+"Combcount":"0",
+"Constcount":"1",
+"DediDeclRefcount":"4",
+"TotalDeclRefcount":"9",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i"
+}
+}

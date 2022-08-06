@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB180-miniAMR-yes.c",
+"function":"",
+"loop id":"0",
+"loop line":"59",
+"loop column":"3",
+"pragma type":"",
+"Addcount":"9",
+"Subcount":"3",
+"Mulcount":"0",
+"Divcount":"1",
+"Cmpcount":"7",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"10",
+"Combcount":"0",
+"Constcount":"14",
+"DediDeclRefcount":"12",
+"TotalDeclRefcount":"79",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"private":["i","j","k","bp"]
+}
+}

@@ -1,0 +1,10 @@
+#pragma omp parallel for default(shared)
+    for (i = 0; i < 20; i++) {
+        x[i] = -1.;
+        if (omp_get_thread_num() == 0) {
+            j = x[0];
+        }
+        if (omp_get_thread_num() == 0) {
+            k = i + 0.050000000000000003;
+        }
+    }

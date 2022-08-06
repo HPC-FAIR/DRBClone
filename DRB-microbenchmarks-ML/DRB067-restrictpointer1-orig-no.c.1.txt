@@ -1,0 +1,5 @@
+#pragma omp parallel for private(i) firstprivate(length)
+    for (i = 0; i <= length - 1; i += 1) {
+        newSxx[i] = 0.;
+        newSyy[i] = 0.;
+    }

@@ -1,0 +1,14 @@
+#pragma omp parallel default(shared) private(i,j,k,bp)
+    {
+        for (in = 0; in < max_num_blocks; ++in) {
+            bp = &blocks[in];
+            for (i = 1; i <= x_block_size; i++)
+                for (j = 1; j <= y_block_size; j++)
+                    for (k = 1; k <= z_block_size; k++)
+                        work[i][j][k] = (bp->array[var][i - 1][j][k] + bp->array[var][i][j - 1][k] + bp->array[var][i][j][k - 1] + bp->array[var][i][j][k] + bp->array[var][i][j][k + 1] + bp->array[var][i][j + 1][k] + bp->array[var][i + 1][j][k]) / 7.;
+            for (i = 1; i <= x_block_size; i++)
+                for (j = 1; j <= y_block_size; j++)
+                    for (k = 1; k <= z_block_size; k++)
+                        bp->array[var][i][j][k] = work[i][j][k];
+        }
+    }

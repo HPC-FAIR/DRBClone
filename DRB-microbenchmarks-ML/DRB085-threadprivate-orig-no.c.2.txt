@@ -1,0 +1,11 @@
+#pragma omp parallel copyin(sum0)
+    {
+        #pragma omp for
+            for (i = 0; i < len; i++) {
+                foo(i);
+            }
+        #pragma omp critical
+            {
+                sum = sum + sum0;
+            }
+    }

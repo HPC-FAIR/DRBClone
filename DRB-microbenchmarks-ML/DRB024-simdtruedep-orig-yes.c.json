@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB024-simdtruedep-orig-yes.c",
+"function":"main",
+"loop id":"2",
+"loop line":"65",
+"loop column":"3",
+"pragma type":"simd",
+"Addcount":"2",
+"Subcount":"1",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"1",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"2",
+"Combcount":"0",
+"Constcount":"3",
+"DediDeclRefcount":"4",
+"TotalDeclRefcount":"10",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i"
+}
+}

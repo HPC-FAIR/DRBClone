@@ -1,0 +1,5 @@
+#pragma omp parallel shared(count)
+    {
+        #pragma omp single
+            count += 1;
+    }

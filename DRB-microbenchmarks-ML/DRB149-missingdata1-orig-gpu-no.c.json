@@ -1,0 +1,28 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB149-missingdata1-orig-gpu-no.c",
+"function":"main",
+"loop id":"3",
+"loop line":"39",
+"loop column":"5",
+"pragma type":"teams ditribute parallel for",
+"Addcount":"2",
+"Subcount":"0",
+"Mulcount":"4",
+"Divcount":"0",
+"Cmpcount":"4",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"0",
+"Combcount":"2",
+"Constcount":"10",
+"DediDeclRefcount":"5",
+"TotalDeclRefcount":"22",
+"ordered":"false",
+"offload":"true",
+"multiversioned":"false",
+"induction variable":"i",
+"map to":["a[0:100]","b[0:]"],
+"map tofrom":["c[0:100]"]
+}
+}

@@ -1,0 +1,15 @@
+#pragma omp parallel default(shared)
+    {
+        #pragma omp for private(i)
+            for (i = 0; i < 10; i++)
+                q[i] += qq[i];
+        #pragma omp critical
+            {
+                q[9] += 1.;
+            }
+        #pragma omp barrier
+        #pragma omp single
+            {
+                q[9] = q[9] - 1.;
+            }
+    }

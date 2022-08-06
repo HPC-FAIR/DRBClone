@@ -1,0 +1,27 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB062-matrixvector2-orig-no.c",
+"function":"mv",
+"loop id":"2",
+"loop line":"60",
+"loop column":"5",
+"pragma type":"parallel for",
+"Addcount":"0",
+"Subcount":"0",
+"Mulcount":"1",
+"Divcount":"0",
+"Cmpcount":"1",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"1",
+"Combcount":"1",
+"Constcount":"2",
+"DediDeclRefcount":"5",
+"TotalDeclRefcount":"9",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"j",
+"reduction":["+:sum"]
+}
+}

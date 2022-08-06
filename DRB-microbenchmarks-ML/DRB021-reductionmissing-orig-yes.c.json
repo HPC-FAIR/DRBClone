@@ -1,0 +1,27 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB021-reductionmissing-orig-yes.c",
+"function":"main",
+"loop id":"3",
+"loop line":"66",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"1",
+"Subcount":"0",
+"Mulcount":"1",
+"Divcount":"0",
+"Cmpcount":"2",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"4",
+"Combcount":"0",
+"Constcount":"2",
+"DediDeclRefcount":"6",
+"TotalDeclRefcount":"16",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i",
+"private":["temp","i","j"]
+}
+}

@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB066-pointernoaliasing-orig-no.c",
+"function":"setup",
+"loop id":"1",
+"loop line":"57",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"0",
+"Subcount":"0",
+"Mulcount":"1",
+"Divcount":"0",
+"Cmpcount":"1",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"2",
+"Combcount":"0",
+"Constcount":"3",
+"DediDeclRefcount":"4",
+"TotalDeclRefcount":"8",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i"
+}
+}

@@ -1,0 +1,5 @@
+#pragma omp parallel for reduction(+: pi) private(x)
+    for (i = 0; i < 2000000000; i++) {
+        x = (i + 0.5) * interval_width;
+        pi += 1. / (x * x + 1.);
+    }

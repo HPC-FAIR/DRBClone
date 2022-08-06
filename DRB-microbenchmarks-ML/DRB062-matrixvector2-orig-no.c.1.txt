@@ -1,0 +1,4 @@
+#pragma omp parallel for reduction(+: sum)
+    for (j = 0; j < 1000; j++) {
+        sum += a[i][j] * v[j];
+    }

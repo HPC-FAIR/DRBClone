@@ -1,0 +1,4 @@
+#pragma omp for
+    for (i = 0; i < len; i++) {
+        foo(i);
+    }

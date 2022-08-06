@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB037-truedepseconddimension-orig-yes.c",
+"function":"main",
+"loop id":"2",
+"loop line":"62",
+"loop column":"5",
+"pragma type":"parallel for",
+"Addcount":"0",
+"Subcount":"1",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"1",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"2",
+"Combcount":"0",
+"Constcount":"2",
+"DediDeclRefcount":"4",
+"TotalDeclRefcount":"10",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"j"
+}
+}

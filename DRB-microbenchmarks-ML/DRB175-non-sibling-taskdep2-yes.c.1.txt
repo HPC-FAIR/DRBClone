@@ -1,0 +1,5 @@
+#pragma omp parallel
+    {
+        #pragma omp task depend(inout : a) shared(a)
+            a++;
+    }

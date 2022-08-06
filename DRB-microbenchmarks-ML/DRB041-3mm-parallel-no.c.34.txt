@@ -1,0 +1,7 @@
+#pragma omp parallel for private(c2)
+    for (c1 = 0; c1 <= 127; c1++) {
+        for (c2 = 0; c2 <= 127; c2++) {
+            G[c1][c2] = 0;
+            F[c1][c2] = 0;
+        }
+    }

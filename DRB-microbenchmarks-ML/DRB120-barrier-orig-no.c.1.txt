@@ -1,0 +1,8 @@
+#pragma omp parallel shared(var)
+    {
+        #pragma omp single
+            var++;
+        #pragma omp barrier
+        #pragma omp single
+            var++;
+    }

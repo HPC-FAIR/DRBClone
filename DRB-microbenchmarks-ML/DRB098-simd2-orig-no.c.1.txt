@@ -1,0 +1,4 @@
+#pragma omp simd collapse(2)
+    for (i = 0; i < len; i++)
+        for (j = 0; j < len; j++)
+            c[i][j] = a[i][j] * b[i][j];

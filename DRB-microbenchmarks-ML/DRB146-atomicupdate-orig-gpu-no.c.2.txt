@@ -1,0 +1,5 @@
+#pragma omp teams distribute
+    for (int i = 0; i < 100; i++) {
+        #pragma omp atomic update
+            var++;
+    }

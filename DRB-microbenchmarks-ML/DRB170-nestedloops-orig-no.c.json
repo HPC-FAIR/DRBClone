@@ -1,0 +1,27 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB170-nestedloops-orig-no.c",
+"function":"main",
+"loop id":"1",
+"loop line":"27",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"1",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"1",
+"Cmpcount":"3",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"5",
+"Combcount":"0",
+"Constcount":"8",
+"DediDeclRefcount":"6",
+"TotalDeclRefcount":"16",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i",
+"private":["j","k","tmp1"]
+}
+}

@@ -1,0 +1,8 @@
+#pragma omp parallel for private(c2)
+    for (c1 = 0; c1 <= n + -1; c1++) {
+        for (c2 = 0; c2 <= n + -1; c2++) {
+            X[c1][c2] = (((double)c1) * (c2 + 1) + 1) / n;
+            A[c1][c2] = (((double)c1) * (c2 + 2) + 2) / n;
+            B[c1][c2] = (((double)c1) * (c2 + 3) + 3) / n;
+        }
+    }

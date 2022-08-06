@@ -1,0 +1,4 @@
+#pragma omp simd
+    for (c4 = nm; c4 <= nk + -1; c4++) {
+        A[c3][c4] = ((double)c3) * c4 / ni;
+    }

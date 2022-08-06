@@ -1,0 +1,4 @@
+#pragma omp simd
+    for (c4 = nm; c4 <= ((16 * c2 + 15 < nl + -1 ? 16 * c2 + 15 : nl + -1)); c4++) {
+        D[c3][c4] = ((double)c3) * (c4 + 2) / nk;
+    }

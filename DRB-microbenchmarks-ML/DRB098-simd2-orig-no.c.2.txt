@@ -1,0 +1,2 @@
+for (j = 0; j < len; j++)
+    c[i][j] = a[i][j] * b[i][j];

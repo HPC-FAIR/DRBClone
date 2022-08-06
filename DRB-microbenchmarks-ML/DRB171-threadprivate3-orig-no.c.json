@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB171-threadprivate3-orig-no.c",
+"function":"main",
+"loop id":"1",
+"loop line":"25",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"1",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"3",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"4",
+"Combcount":"0",
+"Constcount":"7",
+"DediDeclRefcount":"5",
+"TotalDeclRefcount":"11",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i"
+}
+}

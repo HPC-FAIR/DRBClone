@@ -1,0 +1,9 @@
+#pragma omp parallel shared(b,error)
+    {
+        #pragma omp for nowait
+            for (i = 0; i < len; i++)
+                a[i] = b + a[i] * 5;
+        #pragma omp barrier
+        #pragma omp single
+            error = a[9] + 1;
+    }

@@ -1,0 +1,6 @@
+#pragma omp teams distribute parallel for
+    for (int i = 0; i < 100; i++) {
+        for (int j = 0; j < 100; j++) {
+            c[i] += b[j + i * 100] * a[j];
+        }
+    }

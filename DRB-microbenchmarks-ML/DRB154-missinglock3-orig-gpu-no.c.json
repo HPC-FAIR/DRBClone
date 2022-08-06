@@ -1,0 +1,28 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB154-missinglock3-orig-gpu-no.c",
+"function":"main",
+"loop id":"1",
+"loop line":"25",
+"loop column":"3",
+"pragma type":"teams ditribute",
+"Addcount":"0",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"2",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"0",
+"Combcount":"0",
+"Constcount":"4",
+"DediDeclRefcount":"5",
+"TotalDeclRefcount":"14",
+"ordered":"false",
+"offload":"true",
+"multiversioned":"false",
+"induction variable":"i",
+"reduction":["+:var"],
+"map tofrom":["var"]
+}
+}

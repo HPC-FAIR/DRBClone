@@ -1,0 +1,13 @@
+#pragma omp parallel default(none) shared(H,P,maxPos,nDiag) private(nEle,i,si,sj,ai,aj)
+    {
+        for (i = 1; i <= nDiag; ++i) {
+            nEle = nElement(i);
+            calcFirstDiagElement(&i, &si, &sj);
+            #pragma omp for
+                for (j = 1; j <= nEle; ++j) {
+                    ai = si - j + 1;
+                    aj = sj + j - 1;
+                    similarityScore(ai, aj, H, P, &maxPos);
+                }
+        }
+    }

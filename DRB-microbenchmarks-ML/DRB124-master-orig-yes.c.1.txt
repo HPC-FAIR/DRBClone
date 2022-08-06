@@ -1,0 +1,8 @@
+#pragma omp parallel shared(init) private(local)
+    {
+        #pragma omp master
+            {
+                init = 10;
+            }
+        local = init;
+    }

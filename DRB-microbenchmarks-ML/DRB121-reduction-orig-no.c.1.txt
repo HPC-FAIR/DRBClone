@@ -1,0 +1,3 @@
+#pragma omp for schedule(static) reduction(+: sum1)
+    for (i = 0; i < 5; i++)
+        sum1 += i;

@@ -1,0 +1,28 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB145-atomiccritical-orig-gpu-no.c",
+"function":"main",
+"loop id":"1",
+"loop line":"24",
+"loop column":"3",
+"pragma type":"teams ditribute parallel for",
+"Addcount":"0",
+"Subcount":"0",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"2",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"0",
+"Combcount":"0",
+"Constcount":"4",
+"DediDeclRefcount":"2",
+"TotalDeclRefcount":"6",
+"ordered":"false",
+"offload":"true",
+"multiversioned":"false",
+"induction variable":"i",
+"reduction":["+:var"],
+"map tofrom":["var"]
+}
+}

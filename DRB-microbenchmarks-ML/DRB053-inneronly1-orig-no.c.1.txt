@@ -1,0 +1,4 @@
+#pragma omp parallel for
+    for (j = 0; j < 20; j += 1) {
+        a[i][j] += a[i + 1][j];
+    }

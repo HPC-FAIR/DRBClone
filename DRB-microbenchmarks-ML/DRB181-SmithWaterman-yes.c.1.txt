@@ -1,0 +1,6 @@
+#pragma omp for
+    for (j = 1; j <= nEle; ++j) {
+        ai = si - j + 1;
+        aj = sj + j - 1;
+        similarityScore(ai, aj, H, P, &maxPos);
+    }

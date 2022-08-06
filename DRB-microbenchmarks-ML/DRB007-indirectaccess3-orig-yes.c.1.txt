@@ -1,0 +1,6 @@
+#pragma omp parallel for
+    for (i = 0; i < 180; ++i) {
+        int idx = indexSet[i];
+        xa1[idx] += 1.;
+        xa2[idx] += 3.;
+    }

@@ -1,0 +1,26 @@
+{
+"loop - object id : 1":{
+"file":"micro-benchmarks-ML/DRB012-minusminus-var-yes.c",
+"function":"main",
+"loop id":"2",
+"loop line":"72",
+"loop column":"3",
+"pragma type":"parallel for",
+"Addcount":"0",
+"Subcount":"1",
+"Mulcount":"0",
+"Divcount":"0",
+"Cmpcount":"2",
+"Bitcount":"0",
+"Logcount":"0",
+"Assigncount":"1",
+"Combcount":"0",
+"Constcount":"3",
+"DediDeclRefcount":"4",
+"TotalDeclRefcount":"7",
+"ordered":"false",
+"offload":"false",
+"multiversioned":"false",
+"induction variable":"i"
+}
+}
