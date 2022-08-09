@@ -607,7 +607,7 @@ DRB145-atomiccritical-orig-gpu-no.c.1.txt,N2
 DRB146-atomicupdate-orig-gpu-no.c.2.txt,N3
 DRB147-critical1-orig-gpu-no.c.3.txt,N3
 DRB148-critical1-orig-gpu-yes.c.1.txt,Y3
-DRB149-missingdata1-orig-gpu-no.c.1.txt
+DRB149-missingdata1-orig-gpu-no.c.1.txt,N2
 DRB150-missinglock1-orig-gpu-yes.c.1.txt,Y3
 DRB151-missinglock3-orig-gpu-yes.c.1.txt,Y3
 DRB152-missinglock2-orig-gpu-no.c.1.txt,N3
