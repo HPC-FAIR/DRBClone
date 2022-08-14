@@ -2,7 +2,7 @@ import os
 import pandas as pd 
 
 
-data_path = 'OMP-unseen-test'
+data_path = '../DRB-cosineSim/OMP-unseen-test/NPB-IS-1'
 files = os.listdir(data_path) 
 
 
@@ -20,6 +20,8 @@ for file in files:
 
     df = df.sort_values(by=[2], ascending=False)
     # print(df) 
+    
+    df = df[df[1]=='DRB004-antidep2-var-yes.c.1.txt'] 
 
     print('top {}'.format(k)) 
     print(df[[0, 1, 2]][:k])
